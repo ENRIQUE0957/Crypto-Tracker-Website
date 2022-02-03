@@ -1,0 +1,61 @@
+*{
+    padding:0;
+    margin:0
+
+}
+html {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-size: 62.5%; /*this is relative to 1rem  = 10px*/
+}
+@media only screen and (max-width: 61.25em) {
+    html {
+      font-size: 50%;
+    }
+  }
+body{
+font-family: 'Nunito Sans', sans-serif;
+font-weight: 400;
+line-height: 1.6;
+font-size:1rem;
+color:white;
+background-size: cover;
+background-repeat: no-repeat;
+min-height:100vh;
+background-image:linear-gradient(to right bottom,blue,white)
+
+
+}
+.container{
+    display:grid;
+    grid-template-columns: auto;
+    grid-template-rows:2fr;
+    min-height:117rem;
+    background-color:red;
+}
+
+.header{
+    
+    padding:2rem 2rem
+    
+}
+.stats{
+display:flex;
+list-style:none;
+justify-content:space-evenly
+
+
+}
+.header-logo{
+    border-radius:100rem;
+    height:7rem;
+    box-shadow:0 2rem 6rem 0.5rem rgb(97 85 81 / 20%)
+}
+/*header crypto name and value styling*/
+.crypto-name{
+    font-size:1rem
+
+}
+.crypto-value{
+font-size:1.5rem;
+}
