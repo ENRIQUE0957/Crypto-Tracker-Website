@@ -1,10 +1,28 @@
+import { async } from 'regenerator-Runtime'
+import { getJSON } from './helpers'
+
 export const state = {
     headerStats:{},
+
+
+    
 }
 
-const getHeaderStats =async function(){
-    const resp = await fetch('https://api.coinstats.app/public/v1/charts?period=1m&coinId=ethereum')
-    const resp1 = await resp.json()
-    console.log(resp1)
+export const getHeaderStats = async function(){
+    try{
+    const resp1 = await getJSON('https://api.coinlore.net/api/global/')
+    headerStats = resp1
+    state.headerStats = {
+        marketCap:resp1[0].total_mcap,
+        cryptos:resp1[0].coins_count,
+        dominance:[resp1[0].btc_d,resp1[0].eth_d],
+        Vol24:resp1[0].volume_change,
+        marketCapChange:resp1[0].mcap_change,
+    }
+    console.log(state.headerStats)
+    
+    }catch(err){
+        alert(err)
+    }
 
 }
