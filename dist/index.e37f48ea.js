@@ -537,6 +537,7 @@ const renderCoins = async function() {
     await _modelJs.getCoins();
     //rendering the object we created in model
     _coinsViewJsDefault.default.render(_modelJs.state.crypto);
+    console.log(_modelJs.state.crypto);
 };
 renderCoins();
 console.log('heydsd');
@@ -1296,21 +1297,47 @@ exports.default = new HeaderView();
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5AmbI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "coinsView", ()=>coinsView
-);
 class coinsView {
     _parentElement = document.querySelector('.coins-box');
     _data;
-    _render(data) {
+    render(data) {
         this._data = data;
-        const markup = this._generateMarkup;
+        const markup = this._GenerateMarkup();
         this._clear();
-        this._parentElement.insertAdjacentElement('afterbegin', markup);
-    }
-    _generateMarkup() {
+        this._parentElement.insertAdjacentHTML("afterbegin", markup);
+        console.log(this._data);
     }
     _clear() {
-        this._parentElement.innerHTML = "";
+        this._parentElement.innerHTML = '';
+    }
+    _GenerateMarkup() {
+        return `
+        <ul class = 'coins'>
+            <li class = "coin row">
+                <a class = "preview-link" href = "#"></a>
+                    <span class = "rank">${this._data.cryptoRank}</span>
+                    <figure class ="figure">
+                        <img src = "#" alt = "image" class ="coin-image">
+                    </figure>
+                    <span class = "name">
+                        name: ${this._data.cryptoRank}
+                    </span>
+                    <span class = "24H change">
+                        24Hchange:${this._data.cryptoPriceChange1H} 
+                    </span>
+                    <span class = "price">
+                        price:} 
+                    </span>
+                    <span class = "coin-graph">
+                        Graph: 
+                    </span>
+                </li>
+            </ul>
+
+
+
+
+`;
     }
 }
 exports.default = new coinsView();

@@ -23,6 +23,7 @@ const renderCoins = async function(){
     //rendering the object we created in model
 
     coinsView.render(model.state.crypto)
+    console.log(model.state.crypto)
 
 
 
