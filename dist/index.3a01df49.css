@@ -31,7 +31,7 @@ background-image:linear-gradient(to right bottom,blue,white)
     grid-template-columns: auto;
     grid-template-rows:2fr;
     min-height:117rem;
-    background-color:red;
+    background-color:white
 }
 
 .header{
@@ -58,5 +58,8 @@ justify-content:space-evenly
 }
 .crypto-value{
 font-size:1.5rem;
+}
+.container-header{
+    padding:6rem 2rem;
 }
 /*# sourceMappingURL=index.3a01df49.css.map */

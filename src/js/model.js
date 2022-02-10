@@ -3,6 +3,7 @@ import { getJSON } from './helpers'
 
 export const state = {
     headerStats:{},
+    crypto:{}
 
 
     
@@ -26,3 +27,28 @@ export const getHeaderStats = async function(){
     }
 
 }
+
+export const getCoins = async function(){
+    try{
+        const resp1 = await getJSON('https://api.coinstats.app/public/v1/coins?skip=0&limit=30&currency=EUR')
+        crypto = resp1
+        state.crypto = {
+            cryptoMarketCap:resp1.coins[0].marketCap,
+            cryptoRank :resp1.coins[0].rank,
+            cryptoIcon:resp1.coins[0].icon,
+            crytpoSymbol:resp1.coins[0].symbol,
+            CryptoSupply:resp1.coins[0].availableSupply,
+            cryptoVolume:resp1.coins[0].volume,
+            cryptoPriceChange1D:resp1.coins[0].priceChange1d,
+            cryptoPriceChange1H:resp1.coins[0].priceChange1h,
+            cryptoPriceChange1W:resp1.coins[0].priceChange1w,
+            
+            }
+            console.log(state.crypto)
+
+
+
+    }catch(err){
+        alert(err)
+    }
+} 

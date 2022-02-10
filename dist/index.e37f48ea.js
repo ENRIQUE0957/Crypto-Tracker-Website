@@ -523,6 +523,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _modelJs = require("./model.js");
 var _headerViewJs = require("./headerView.js");
 var _headerViewJsDefault = parcelHelpers.interopDefault(_headerViewJs);
+var _coinsViewJs = require("./coinsView.js");
+var _coinsViewJsDefault = parcelHelpers.interopDefault(_coinsViewJs);
 const RenderHeader = async function() {
     //fetching getting the object with the data we need
     await _modelJs.getHeaderStats();
@@ -530,19 +532,30 @@ const RenderHeader = async function() {
     _headerViewJsDefault.default.render(_modelJs.state.headerStats);
 };
 RenderHeader();
+const renderCoins = async function() {
+    //calling the object we created 
+    await _modelJs.getCoins();
+    //rendering the object we created in model
+    _coinsViewJsDefault.default.render(_modelJs.state.crypto);
+};
+renderCoins();
 console.log('heydsd');
 
-},{"./model.js":"Y4A21","./headerView.js":"dmg94","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
+},{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state
 );
 parcelHelpers.export(exports, "getHeaderStats", ()=>getHeaderStats
 );
+parcelHelpers.export(exports, "getCoins", ()=>getCoins
+);
 var _regeneratorRuntime = require("regenerator-Runtime");
 var _helpers = require("./helpers");
 const state = {
     headerStats: {
+    },
+    crypto: {
     }
 };
 const getHeaderStats = async function() {
@@ -564,38 +577,28 @@ const getHeaderStats = async function() {
         alert(err);
     }
 };
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","regenerator-Runtime":"15yAd","./helpers":"hGI1E"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
+const getCoins = async function() {
+    try {
+        const resp1 = await _helpers.getJSON('https://api.coinstats.app/public/v1/coins?skip=0&limit=30&currency=EUR');
+        crypto = resp1;
+        state.crypto = {
+            cryptoMarketCap: resp1.coins[0].marketCap,
+            cryptoRank: resp1.coins[0].rank,
+            cryptoIcon: resp1.coins[0].icon,
+            crytpoSymbol: resp1.coins[0].symbol,
+            CryptoSupply: resp1.coins[0].availableSupply,
+            cryptoVolume: resp1.coins[0].volume,
+            cryptoPriceChange1D: resp1.coins[0].priceChange1d,
+            cryptoPriceChange1H: resp1.coins[0].priceChange1h,
+            cryptoPriceChange1W: resp1.coins[0].priceChange1w
+        };
+        console.log(state.crypto);
+    } catch (err) {
+        alert(err);
+    }
 };
 
-},{}],"15yAd":[function(require,module,exports) {
+},{"regenerator-Runtime":"15yAd","./helpers":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"15yAd":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1190,7 +1193,37 @@ const getJSON = async function(url) {
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dmg94":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"dmg94":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class HeaderView {
@@ -1259,6 +1292,28 @@ class HeaderView {
     }
 }
 exports.default = new HeaderView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5AmbI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "coinsView", ()=>coinsView
+);
+class coinsView {
+    _parentElement = document.querySelector('.coins-box');
+    _data;
+    _render(data) {
+        this._data = data;
+        const markup = this._generateMarkup;
+        this._clear();
+        this._parentElement.insertAdjacentElement('afterbegin', markup);
+    }
+    _generateMarkup() {
+    }
+    _clear() {
+        this._parentElement.innerHTML = "";
+    }
+}
+exports.default = new coinsView();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ddCAb","aenu9"], "aenu9", "parcelRequirefb07")
 
