@@ -32,16 +32,18 @@ export const getCoins = async function(){
     try{
         const resp1 = await getJSON('https://api.coinstats.app/public/v1/coins?skip=0&limit=30&currency=EUR')
         crypto = resp1
+        console.log(resp1)
         state.crypto = {
             cryptoMarketCap:resp1.coins[0].marketCap,
             cryptoRank :resp1.coins[0].rank,
             cryptoIcon:resp1.coins[0].icon,
-            crytpoSymbol:resp1.coins[0].symbol,
+            cryptoSymbol:resp1.coins[0].symbol,
             CryptoSupply:resp1.coins[0].availableSupply,
             cryptoVolume:resp1.coins[0].volume,
             cryptoPriceChange1D:resp1.coins[0].priceChange1d,
             cryptoPriceChange1H:resp1.coins[0].priceChange1h,
             cryptoPriceChange1W:resp1.coins[0].priceChange1w,
+            cryptoPrice:resp1.coins[0].price
             
             }
             console.log(state.crypto)

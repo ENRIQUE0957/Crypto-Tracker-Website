@@ -582,16 +582,18 @@ const getCoins = async function() {
     try {
         const resp1 = await _helpers.getJSON('https://api.coinstats.app/public/v1/coins?skip=0&limit=30&currency=EUR');
         crypto = resp1;
+        console.log(resp1);
         state.crypto = {
             cryptoMarketCap: resp1.coins[0].marketCap,
             cryptoRank: resp1.coins[0].rank,
             cryptoIcon: resp1.coins[0].icon,
-            crytpoSymbol: resp1.coins[0].symbol,
+            cryptoSymbol: resp1.coins[0].symbol,
             CryptoSupply: resp1.coins[0].availableSupply,
             cryptoVolume: resp1.coins[0].volume,
             cryptoPriceChange1D: resp1.coins[0].priceChange1d,
             cryptoPriceChange1H: resp1.coins[0].priceChange1h,
-            cryptoPriceChange1W: resp1.coins[0].priceChange1w
+            cryptoPriceChange1W: resp1.coins[0].priceChange1w,
+            cryptoPrice: resp1.coins[0].price
         };
         console.log(state.crypto);
     } catch (err) {
@@ -1245,45 +1247,48 @@ class HeaderView {
         <div class = 'header-stats'>
         
         <ul class = 'stats'>
-        <li class = "stats-li">
+        <li class = "list-item">
             <div class = "crypto-name">
-                cryptos:
+                cryptos
             </div>
             <div class = "crypto-value">
-                ${this._data.cryptos}
+                ${parseFloat(this._data.cryptos)}
             </div>
             </li>
-         <li class = "stats-li">
+         <li class = "list-item">
                 <div class = "crypto-name">
-                    Market Cap:
+                    Market Cap
                 </div>
                 <div class = "crypto-value">
-                    ${this._data.marketCap}
+                    ${this._data.marketCap.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        })}
                 </div>
             </li>
-        <li class = "stats-li">
+        <li class = "list-item">
                 <div class = "crypto-name">
-                        24h Vol:
+                        Vol
                 </div>
                 <div class = "crypto-value">
-                        ${this._data.Vol24}
+                        ${this._data.Vol24}%
                 </div>
             </li>
-            <li class = "stats-li">
+            <li class = "list-item">
                         <div class = "crypto-name">
-                            Dominance:
+                            Dominance
                         </div>
                         <div class = "crypto-value">
-                            BTC:${this._data.dominance[0]}, 
-                            Eth:${this._data.dominance[1]}
+                            BTC:${this._data.dominance[0]}%, 
+                            Eth:${this._data.dominance[1]}%
                         </div>
                         </li>
-                <li class = "stats-li">
+                <li class = "list-item">
                         <div class = "crypto-name">
-                                MarketCap-Change:
+                                MarketCap Change
                         </div>
                         <div class = "crypto-value">
-                                ${this._data.marketCapChange}
+                                ${this._data.marketCapChange}%
                         </div>
                 </li>
         </ul>
@@ -1313,21 +1318,24 @@ class coinsView {
     _GenerateMarkup() {
         return `
         <ul class = 'coins'>
-            <li class = "coin row">
+            <li class = "coin-row">
+            <div class = "crypto-ID">
+            <img src = "${this._data.cryptoIcon}" alt = "image" class ="coin-image">
                 <a class = "preview-link" href = "#"></a>
-                    <span class = "rank">${this._data.cryptoRank}</span>
-                    <figure class ="figure">
-                        <img src = "#" alt = "image" class ="coin-image">
-                    </figure>
-                    <span class = "name">
-                        name: ${this._data.cryptoRank}
+                <span class = "name">
+                         ${this._data.cryptoSymbol}
                     </span>
-                    <span class = "24H change">
-                        24Hchange:${this._data.cryptoPriceChange1H} 
+                    <span class = "rank">${this._data.cryptoRank}</span>
+                    </div>
+                    <div class ="crypto-Stats">
+                    <span class = "Volume-change">${this._data.cryptoVolume}</span>
+                    <span class = "coin-marketcap">
+                        ${this._data.cryptoMarketCap} 
                     </span>
                     <span class = "price">
-                        price:} 
+                        ${this._data.cryptoPrice} 
                     </span>
+                    </div>
                     <span class = "coin-graph">
                         Graph: 
                     </span>

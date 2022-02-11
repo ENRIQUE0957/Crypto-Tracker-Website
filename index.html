@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto-website</title>
     <link href = '/style.css' rel = 'stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script type = "module" defer src ="src/js/controller.js"></script>
 </head>
 <body>
@@ -15,7 +18,7 @@
         <div class = 'header-stats'>
             
             <ul class = 'stats'>
-            <li class = "stats-li">
+            <li class = "list-item">
                 <div class = "crypto-name">
                     cryptos:
                 </div>
@@ -23,7 +26,7 @@
                     1,32332
                 </div>
                 </li>
-             <li class = "stats-li">
+             <li class = "list-item">
                     <div class = "crypto-name">
                         Market Cap:
                     </div>
@@ -31,7 +34,7 @@
                         1,32332
                     </div>
                 </li>
-            <li class = "stats-li">
+            <li class = "list-item">
                     <div class = "crypto-name">
                             24h Vol:
                     </div>
@@ -39,7 +42,7 @@
                             1,32332
                     </div>
                 </li>
-                <li class = "stats-li">
+                <li class = "list-item">
                             <div class = "crypto-name">
                                 Dominance:
                             </div>
@@ -47,7 +50,7 @@
                                 1,32332
                             </div>
                             </li>
-                    <li class = "stats-li">
+                    <li class = "list-item">
                             <div class = "crypto-name">
                                     Exchanges:
                             </div>
@@ -62,7 +65,28 @@
     </header>
     <div class = container-header>
         <div class = "container-header-box">
-            <span>Crypto Tracker</span>
+            <span></span>
+            
+            <div class = "header-info">
+              <ul class = "header-list">
+                  <li class = "header-name">
+                      Name
+                  </li>
+                  <li class = "header-rank">
+                    Volume
+                </li>
+                <li class = "header-Markercap">
+                    marketCap
+                </li>
+                <li class = "header-price">
+                    price
+                </li>
+                <li class = "header-graph">
+                    graph
+                </li>
+                  </ul>
+            </div>
+            
         </div>
 
     </div>
@@ -71,13 +95,14 @@
         
             <ul class = 'coins'>
                 <!--
-                <li class = "coin row">
+                <li class = "coin-row">
+                    <img src = "#" alt = "image" class ="coin-image">
                     <a class = "preview-link" href = "#">
                         Href
                     </a>
                     <span class = "rank">#</span>
                     <figure class ="figure">
-                        <img src = "#" alt = "image" class ="coin-image">
+                       
                     </figure>
                     <span class = "name">
                         name: 

@@ -21,45 +21,48 @@ _GenerateMarkup(){
         <div class = 'header-stats'>
         
         <ul class = 'stats'>
-        <li class = "stats-li">
+        <li class = "list-item">
             <div class = "crypto-name">
-                cryptos:
+                cryptos
             </div>
             <div class = "crypto-value">
-                ${this._data.cryptos}
+                ${parseFloat(this._data.cryptos)}
             </div>
             </li>
-         <li class = "stats-li">
+         <li class = "list-item">
                 <div class = "crypto-name">
-                    Market Cap:
+                    Market Cap
                 </div>
                 <div class = "crypto-value">
-                    ${this._data.marketCap}
+                    ${this._data.marketCap.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                      })}
                 </div>
             </li>
-        <li class = "stats-li">
+        <li class = "list-item">
                 <div class = "crypto-name">
-                        24h Vol:
+                        Vol
                 </div>
                 <div class = "crypto-value">
-                        ${this._data.Vol24}
+                        ${this._data.Vol24}%
                 </div>
             </li>
-            <li class = "stats-li">
+            <li class = "list-item">
                         <div class = "crypto-name">
-                            Dominance:
+                            Dominance
                         </div>
                         <div class = "crypto-value">
-                            BTC:${this._data.dominance[0]}, 
-                            Eth:${this._data.dominance[1]}
+                            BTC:${this._data.dominance[0]}%, 
+                            Eth:${this._data.dominance[1]}%
                         </div>
                         </li>
-                <li class = "stats-li">
+                <li class = "list-item">
                         <div class = "crypto-name">
-                                MarketCap-Change:
+                                MarketCap Change
                         </div>
                         <div class = "crypto-value">
-                                ${this._data.marketCapChange}
+                                ${this._data.marketCapChange}%
                         </div>
                 </li>
         </ul>

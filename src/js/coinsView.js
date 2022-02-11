@@ -19,21 +19,24 @@ _clear(){
 _GenerateMarkup(){
         return `
         <ul class = 'coins'>
-            <li class = "coin row">
+            <li class = "coin-row">
+            <div class = "crypto-ID">
+            <img src = "${this._data.cryptoIcon}" alt = "image" class ="coin-image">
                 <a class = "preview-link" href = "#"></a>
-                    <span class = "rank">${this._data.cryptoRank}</span>
-                    <figure class ="figure">
-                        <img src = "#" alt = "image" class ="coin-image">
-                    </figure>
-                    <span class = "name">
-                        name: ${this._data.cryptoRank}
+                <span class = "name">
+                         ${this._data.cryptoSymbol}
                     </span>
-                    <span class = "24H change">
-                        24Hchange:${this._data.cryptoPriceChange1H} 
+                    <span class = "rank">${this._data.cryptoRank}</span>
+                    </div>
+                    <div class ="crypto-Stats">
+                    <span class = "Volume-change">${this._data.cryptoVolume}</span>
+                    <span class = "coin-marketcap">
+                        ${this._data.cryptoMarketCap} 
                     </span>
                     <span class = "price">
-                        price:} 
+                        ${this._data.cryptoPrice} 
                     </span>
+                    </div>
                     <span class = "coin-graph">
                         Graph: 
                     </span>

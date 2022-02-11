@@ -7,6 +7,7 @@ html {
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     font-size: 62.5%; /*this is relative to 1rem  = 10px*/
+    font-family: 'Roboto', sans-serif;
 }
 @media only screen and (max-width: 61.25em) {
     html {
@@ -14,7 +15,6 @@ html {
     }
   }
 body{
-font-family: 'Nunito Sans', sans-serif;
 font-weight: 400;
 line-height: 1.6;
 font-size:1rem;
@@ -22,7 +22,8 @@ color:white;
 background-size: cover;
 background-repeat: no-repeat;
 min-height:100vh;
-background-image:linear-gradient(to right bottom,blue,white)
+background-image:linear-gradient(to right bottom,blue,white);
+font-family: 'Roboto', sans-serif;
 
 
 }
@@ -31,12 +32,13 @@ background-image:linear-gradient(to right bottom,blue,white)
     grid-template-columns: auto;
     grid-template-rows:2fr;
     min-height:117rem;
-    background-color:white
+    
+    padding:1rem 13rem;
 }
 
 .header{
     
-    padding:2rem 2rem
+    padding:0rem 2rem
     
 }
 .stats{
@@ -46,19 +48,98 @@ justify-content:space-evenly
 
 
 }
+.list-item{
+    border-bottom:1px solid white
+    
+}
+.list-item:hover{
+    transform:translateY(-3px);
+    box-shadow:0 1.5rem 2rem rgb(0 0 0 /20%);
+}
 .header-logo{
     border-radius:100rem;
     height:7rem;
-    box-shadow:0 2rem 6rem 0.5rem rgb(97 85 81 / 20%)
+    box-shadow:0 2rem 6rem 0.5rem rgb(97 85 81 / 20%);
+    margin-top:1rem;
+    margin-left:1rem;
+}
+.header-rank{
+
+}
+
+.header-name{
+    margin-right:13rem;
 }
 /*header crypto name and value styling*/
 .crypto-name{
-    font-size:1rem
+    font-size:1.2rem;
+    text-transform:uppercase;
+
 
 }
 .crypto-value{
-font-size:1.5rem;
+font-size:1.2rem;
+text-align:center;
 }
 .container-header{
-    padding:6rem 2rem;
+    padding:3rem 2rem;
+    margin-top:9rem;
+}
+
+/*coins box*/
+.coins-box{
+    background-color:grey;
+    border-radius:50px;
+}
+.coin-row{
+    display:flex;
+    width:92%;
+    justify-content: space-between;
+    margin-top:2rem;
+    background-color:black;
+    margin-left:1.6rem
+}
+.header-list{
+    display:flex;
+    list-style: none;
+    font-size:1.8rem;
+    justify-content: space-evenly;
+    font-weight: 400;
+
+}
+
+/*coins container styling*/
+.rank{
+padding:1rem;
+font-size:2rem;
+}
+.name{
+padding:1rem;
+font-size:2rem;
+}
+.Volume-change{
+    padding:1rem;
+    align-self:center;
+    
+    
+}
+.price{
+padding:1rem;
+align-self: center;
+}
+.coin-image{
+
+}
+.crypto-ID{
+    margin-left:1rem;
+    display:flex;
+    align-content: center;
+    align-items: center;
+}
+
+/*coin-stats*/
+.crypto-Stats{
+    display:flex;
+    justify-content: space-evenly;
+
 }
