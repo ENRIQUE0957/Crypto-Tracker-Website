@@ -586,24 +586,7 @@ const loadCoins = async function() {
     const resp2 = await resp1.json();
     state.coins = resp2;
     console.log(state.coins);
-} /*
-export const getGraph =async function(){
-    try{
-    const resp2 = await getJSON('https://api.coinstats.app/public/v1/charts?period=1m&coinId=ethereum')
-    crypto.graph = resp2;
-    console.log(resp2)
-    state.crypto.graph={
-
-    }
-    
-
-
-}catch(err){
-        alert(err)
-    }
-}
-getGraph()
-*/ ;
+};
 
 },{"regenerator-Runtime":"15yAd","./helpers":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"15yAd":[function(require,module,exports) {
 /**
