@@ -51,21 +51,3 @@ export const loadCoins = async function(){
    
     
 
-/*
-export const getGraph =async function(){
-    try{
-    const resp2 = await getJSON('https://api.coinstats.app/public/v1/charts?period=1m&coinId=ethereum')
-    crypto.graph = resp2;
-    console.log(resp2)
-    state.crypto.graph={
-
-    }
-    
-
-
-}catch(err){
-        alert(err)
-    }
-}
-getGraph()
-*/
