@@ -525,22 +525,25 @@ var _headerViewJs = require("./headerView.js");
 var _headerViewJsDefault = parcelHelpers.interopDefault(_headerViewJs);
 var _coinsViewJs = require("./coinsView.js");
 var _coinsViewJsDefault = parcelHelpers.interopDefault(_coinsViewJs);
+const parentElement = document.querySelector('.coins-box');
 const RenderHeader = async function() {
     //fetching getting the object with the data we need
     await _modelJs.getHeaderStats();
     //rendering the data to the GUI
     _headerViewJsDefault.default.render(_modelJs.state.headerStats);
+//here we used the mvc paradigm 
 };
 RenderHeader();
+//rendering our coins 
 const renderCoins = async function() {
-    //calling the object we created 
-    await _modelJs.getCoins();
-    //rendering the object we created in model
-    _coinsViewJsDefault.default.render(_modelJs.state.crypto);
-    console.log(_modelJs.state.crypto);
+    document.addEventListener('DOMContentLoaded', async ()=>{
+        //getting the object we are using as a parameter
+        await _modelJs.loadCoins();
+        //rendering the data
+        _coinsViewJsDefault.default.render(_modelJs.state.coins.coins);
+    });
 };
 renderCoins();
-console.log('heydsd');
 
 },{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -549,14 +552,14 @@ parcelHelpers.export(exports, "state", ()=>state
 );
 parcelHelpers.export(exports, "getHeaderStats", ()=>getHeaderStats
 );
-parcelHelpers.export(exports, "getCoins", ()=>getCoins
+parcelHelpers.export(exports, "loadCoins", ()=>loadCoins
 );
 var _regeneratorRuntime = require("regenerator-Runtime");
 var _helpers = require("./helpers");
 const state = {
     headerStats: {
     },
-    crypto: {
+    coins: {
     }
 };
 const getHeaderStats = async function() {
@@ -578,28 +581,29 @@ const getHeaderStats = async function() {
         alert(err);
     }
 };
-const getCoins = async function() {
-    try {
-        const resp1 = await _helpers.getJSON('https://api.coinstats.app/public/v1/coins?skip=0&limit=30&currency=EUR');
-        crypto = resp1;
-        console.log(resp1);
-        state.crypto = {
-            cryptoMarketCap: resp1.coins[0].marketCap,
-            cryptoRank: resp1.coins[0].rank,
-            cryptoIcon: resp1.coins[0].icon,
-            cryptoSymbol: resp1.coins[0].symbol,
-            CryptoSupply: resp1.coins[0].availableSupply,
-            cryptoVolume: resp1.coins[0].volume,
-            cryptoPriceChange1D: resp1.coins[0].priceChange1d,
-            cryptoPriceChange1H: resp1.coins[0].priceChange1h,
-            cryptoPriceChange1W: resp1.coins[0].priceChange1w,
-            cryptoPrice: resp1.coins[0].price
-        };
-        console.log(state.crypto);
-    } catch (err) {
-        alert(err);
+const loadCoins = async function() {
+    const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=30&currency=EUR');
+    const resp2 = await resp1.json();
+    state.coins = resp2;
+    console.log(state.coins);
+} /*
+export const getGraph =async function(){
+    try{
+    const resp2 = await getJSON('https://api.coinstats.app/public/v1/charts?period=1m&coinId=ethereum')
+    crypto.graph = resp2;
+    console.log(resp2)
+    state.crypto.graph={
+
     }
-};
+    
+
+
+}catch(err){
+        alert(err)
+    }
+}
+getGraph()
+*/ ;
 
 },{"regenerator-Runtime":"15yAd","./helpers":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"15yAd":[function(require,module,exports) {
 /**
@@ -1302,53 +1306,145 @@ exports.default = new HeaderView();
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5AmbI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-class coinsView {
+class CoinsView {
     _parentElement = document.querySelector('.coins-box');
-    _data;
-    render(data) {
-        this._data = data;
-        const markup = this._GenerateMarkup();
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markup);
-        console.log(this._data);
-    }
-    _clear() {
+    _c;
+    render(c) {
+        this._c = c;
+        //clearing the parent element before we manipulate it
         this._parentElement.innerHTML = '';
+        this.loopOverCoins(c);
     }
-    _GenerateMarkup() {
-        return `
-        <ul class = 'coins'>
-            <li class = "coin-row">
-            <div class = "crypto-ID">
-            <img src = "${this._data.cryptoIcon}" alt = "image" class ="coin-image">
-                <a class = "preview-link" href = "#"></a>
-                <span class = "name">
-                         ${this._data.cryptoSymbol}
-                    </span>
-                    <span class = "rank">${this._data.cryptoRank}</span>
-                    </div>
-                    <div class ="crypto-Stats">
-                    <span class = "Volume-change">${this._data.cryptoVolume}</span>
-                    <span class = "coin-marketcap">
-                        ${this._data.cryptoMarketCap} 
-                    </span>
-                    <span class = "price">
-                        ${this._data.cryptoPrice} 
-                    </span>
-                    </div>
-                    <span class = "coin-graph">
-                        Graph: 
-                    </span>
+    loopOverCoins(c1) {
+        //function to get the chart array prices
+        const renderGraph = async function(c) {
+            //first we will have a function to get the chart info 
+            //this function will return an array with the price info into an array
+            const res = await fetch(`https://api.coinstats.app/public/v1/charts?period=1w&coinId=${c}`);
+            const resp1 = res.json();
+            try {
+                const resp2 = await resp1;
+                const data = resp2.chart;
+                const priceHistory = data;
+                data.forEach((element, j)=>{
+                    priceHistory.push(element[1]);
+                });
+                return priceHistory;
+            } catch (err) {
+                alert(err);
+            }
+        };
+        //we will loop over the html we want to insert into our webpage 
+        for(let j = 0; j < c1.length; j++){
+            //markup that will be manipulated into html
+            const markup = `
+        <li class = "crypto">
+        <div class = "crypto-ID">
+        <img src = "${c1[j].icon}" alt = "image" class ="coin-image">
+            <a class = "preview-link" href = "#"></a>
+            <span class = "name">
+                     ${c1[j].symbol}
+                </span>
+                <span class = "rank">${c1[j].rank}</span>
+                </div>
+                
+                <span class = "Volume-change">${c1[j].volume} %</span>
+                <span class = "coin-marketcap">
+                    ${c1[j].marketCap.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            })} 
+                </span>
+                <span class = "price">
+                    ${c1[j].price.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            })}
+                        </span>
+                        <div class="chart__container" id="container${j + 1}" style="width: 60%">
+                        </div>
                 </li>
-            </ul>
-
-
-
-
-`;
+                    
+    
+                `;
+            //this will insert the crypto id as a paramater for our crypo array function we will use this in our graph data
+            const graphArray = renderGraph(c1[j].id).then((success, err)=>{
+                if (err) console.log(err);
+                this._parentElement.insertAdjacentHTML('beforeend', markup);
+                //creating the chart for our container 
+                new Highcharts.stockChart(`container${j + 1}`, {
+                    responsive: {
+                        rules: [
+                            {
+                                condition: {
+                                    maxWidth: 25
+                                }
+                            }, 
+                        ]
+                    },
+                    chart: {
+                        margin: 0,
+                        backgroundColor: "#1a1a1d"
+                    },
+                    series: [
+                        {
+                            data: success
+                        }, 
+                    ],
+                    navigation: {
+                        buttonOptions: {
+                            enabled: false
+                        }
+                    },
+                    rangeSelector: {
+                        enabled: false
+                    },
+                    navigator: {
+                        enabled: false
+                    },
+                    scrollbar: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    xAxis: {
+                        lineWidth: 0,
+                        minorGridLineWidth: 0,
+                        lineColor: "transparent",
+                        labels: {
+                            enabled: false
+                        },
+                        minorTickLength: 0,
+                        tickLength: 0
+                    },
+                    yAxis: {
+                        gridLineWidth: 0,
+                        minorGridLineWidth: 0,
+                        labels: {
+                            enabled: false
+                        },
+                        plotLines: [
+                            {
+                                value: 0,
+                                width: 0,
+                                color: "#aaa",
+                                zIndex: 10
+                            }, 
+                        ],
+                        stackLabels: {
+                            enabled: true
+                        }
+                    }
+                });
+            });
+        }
     }
 }
-exports.default = new coinsView();
+exports.default = new CoinsView();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ddCAb","aenu9"], "aenu9", "parcelRequirefb07")
 

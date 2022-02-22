@@ -1,9 +1,12 @@
 import { async } from 'regenerator-Runtime'
 import { getJSON } from './helpers'
 
+
 export const state = {
     headerStats:{},
-    crypto:{}
+    coins:{}
+
+
 
 
     
@@ -28,29 +31,41 @@ export const getHeaderStats = async function(){
 
 }
 
-export const getCoins = async function(){
+
+
+    
+//function to get coins we will use as parameters for our coins rendering 
+export const loadCoins = async function(){
+    const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=30&currency=EUR')
+    const resp2 = await resp1.json()
+   
+    state.coins = resp2;
+    console.log(state.coins)
+    
+    
+    
+}
+
+
+    
+   
+    
+
+/*
+export const getGraph =async function(){
     try{
-        const resp1 = await getJSON('https://api.coinstats.app/public/v1/coins?skip=0&limit=30&currency=EUR')
-        crypto = resp1
-        console.log(resp1)
-        state.crypto = {
-            cryptoMarketCap:resp1.coins[0].marketCap,
-            cryptoRank :resp1.coins[0].rank,
-            cryptoIcon:resp1.coins[0].icon,
-            cryptoSymbol:resp1.coins[0].symbol,
-            CryptoSupply:resp1.coins[0].availableSupply,
-            cryptoVolume:resp1.coins[0].volume,
-            cryptoPriceChange1D:resp1.coins[0].priceChange1d,
-            cryptoPriceChange1H:resp1.coins[0].priceChange1h,
-            cryptoPriceChange1W:resp1.coins[0].priceChange1w,
-            cryptoPrice:resp1.coins[0].price
-            
-            }
-            console.log(state.crypto)
+    const resp2 = await getJSON('https://api.coinstats.app/public/v1/charts?period=1m&coinId=ethereum')
+    crypto.graph = resp2;
+    console.log(resp2)
+    state.crypto.graph={
+
+    }
+    
 
 
-
-    }catch(err){
+}catch(err){
         alert(err)
     }
-} 
+}
+getGraph()
+*/

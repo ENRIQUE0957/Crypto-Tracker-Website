@@ -66,9 +66,14 @@ justify-content:space-evenly
 .header-rank{
 
 }
-
+.header-price{
+margin-left:3rem
+}
+.header-graph{
+    margin-left:2rem;
+}
 .header-name{
-    margin-right:13rem;
+    margin-left:8rem;
 }
 /*header crypto name and value styling*/
 .crypto-name{
@@ -87,17 +92,29 @@ text-align:center;
 }
 
 /*coins box*/
+.coins{
+    display:flex;
+    width:100%;
+    border-bottom:2px solid rgb(173, 172, 172)
+}
 .coins-box{
-    background-color:grey;
+    background-color:white;
     border-radius:50px;
+    width:70%;
+    margin-left:24rem;
 }
 .coin-row{
     display:flex;
-    width:92%;
-    justify-content: space-between;
+    width:97%;
+    justify-content: space-evenly;
     margin-top:2rem;
-    background-color:black;
-    margin-left:1.6rem
+    background-color:white;
+    color:black;
+    font-size:1.4rem;
+    margin-left:2rem;
+    padding:0.8rem 0rem
+  
+    
 }
 .header-list{
     display:flex;
@@ -105,22 +122,23 @@ text-align:center;
     font-size:1.8rem;
     justify-content: space-evenly;
     font-weight: 400;
+    width:65%;
+    margin-left:25rem;
 
 }
 
 /*coins container styling*/
 .rank{
 padding:1rem;
-font-size:2rem;
+font-size:1.4rem;
 }
 .name{
 padding:1rem;
-font-size:2rem;
+font-size:1.7rem;
 }
 .Volume-change{
     padding:1rem;
     align-self:center;
-    
     
 }
 .price{
@@ -128,7 +146,7 @@ padding:1rem;
 align-self: center;
 }
 .coin-image{
-
+height:5rem;
 }
 .crypto-ID{
     margin-left:1rem;
@@ -141,5 +159,17 @@ align-self: center;
 .crypto-Stats{
     display:flex;
     justify-content: space-evenly;
+
+}
+.coin-marketcap{
+align-self:center;
+}
+#myChart{
+ height:300px;
+ width:300px;
+ margin-right:10rem;
+ padding:0.5rem;
+    
+    
 
 }

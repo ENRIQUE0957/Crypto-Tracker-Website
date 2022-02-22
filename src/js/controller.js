@@ -1,6 +1,7 @@
 import * as model from './model.js'
 import headerView from './headerView.js'
 import coinsView from './coinsView.js'
+const parentElement = document.querySelector('.coins-box')
 const RenderHeader =async function(){
     //fetching getting the object with the data we need
     await model.getHeaderStats()
@@ -10,28 +11,31 @@ const RenderHeader =async function(){
     headerView.render(model.state.headerStats)
     
 
-
+//here we used the mvc paradigm 
 
 
 }
 RenderHeader()
 
+
+
+
+
+
+
+
+
+//rendering our coins 
 const renderCoins = async function(){
-    //calling the object we created 
-    await model.getCoins()
-
-    //rendering the object we created in model
-
-    coinsView.render(model.state.crypto)
-    console.log(model.state.crypto)
+document.addEventListener('DOMContentLoaded',async() =>{
+    //getting the object we are using as a parameter
+    await model.loadCoins()
 
 
+    //rendering the data
+    coinsView.render(model.state.coins.coins)
 
-
-
-
+})
 }
+
 renderCoins()
-
-console.log('heydsd')
-

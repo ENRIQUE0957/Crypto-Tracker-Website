@@ -1,57 +1,188 @@
-class coinsView {
+class CoinsView{
 _parentElement = document.querySelector('.coins-box')
-_data;
+_c
 
 
-render(data){
-    this._data = data;
-    const markup = this._GenerateMarkup();
-    this._clear()
-    this._parentElement.insertAdjacentHTML("afterbegin",markup)
-    console.log(this._data)
+
+render(c){
+    this._c = c;
+    //clearing the parent element before we manipulate it
+    this._parentElement.innerHTML = ''
+    
+    this.loopOverCoins(c)
 }
 
-_clear(){
-    this._parentElement.innerHTML = ''
- }
 
 
-_GenerateMarkup(){
-        return `
-        <ul class = 'coins'>
-            <li class = "coin-row">
-            <div class = "crypto-ID">
-            <img src = "${this._data.cryptoIcon}" alt = "image" class ="coin-image">
-                <a class = "preview-link" href = "#"></a>
-                <span class = "name">
-                         ${this._data.cryptoSymbol}
-                    </span>
-                    <span class = "rank">${this._data.cryptoRank}</span>
-                    </div>
-                    <div class ="crypto-Stats">
-                    <span class = "Volume-change">${this._data.cryptoVolume}</span>
-                    <span class = "coin-marketcap">
-                        ${this._data.cryptoMarketCap} 
-                    </span>
-                    <span class = "price">
-                        ${this._data.cryptoPrice} 
-                    </span>
-                    </div>
-                    <span class = "coin-graph">
-                        Graph: 
-                    </span>
+loopOverCoins(c){
+    //function to get the chart array prices
+    const renderGraph = async function(c){
+        //first we will have a function to get the chart info 
+        //this function will return an array with the price info into an array
+       const res = await fetch(`https://api.coinstats.app/public/v1/charts?period=1w&coinId=${c}`)
+       const resp1 = res.json()
+       try{
+        const resp2 = await resp1
+        const data = resp2.chart
+        const priceHistory = data
+        data.forEach((element,j) => {
+          priceHistory.push(element[1])
+            
+          
+        });
+        return priceHistory
+        
+    
+    
+       }catch(err){
+           alert(err)
+       }
+        
+    }
+    
+
+
+
+
+
+    //we will loop over the html we want to insert into our webpage 
+    for(let j = 0; j < c.length;j++){
+        //markup that will be manipulated into html
+       const markup = `
+        <li class = "crypto">
+        <div class = "crypto-ID">
+        <img src = "${c[j].icon}" alt = "image" class ="coin-image">
+            <a class = "preview-link" href = "#"></a>
+            <span class = "name">
+                     ${c[j].symbol}
+                </span>
+                <span class = "rank">${c[j].rank}</span>
+                </div>
+                
+                <span class = "Volume-change">${c[j].volume} %</span>
+                <span class = "coin-marketcap">
+                    ${c[j].marketCap.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                      })} 
+                </span>
+                <span class = "price">
+                    ${c[j].price.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                      })}
+                        </span>
+                        <div class="chart__container" id="container${j+1}" style="width: 60%">
+                        </div>
                 </li>
-            </ul>
+                    
+    
+                ` 
+                //this will insert the crypto id as a paramater for our crypo array function we will use this in our graph data
+                const graphArray = renderGraph(c[j].id).then((success, err) =>{
+                    if(err){
+                      console.log(err)
+                    }
+                
+                this._parentElement.insertAdjacentHTML('beforeend',markup)
+                
 
-
-
-
-`
-
-
+                    //creating the chart for our container 
+                new Highcharts.stockChart(`container${j+1}`, {
+                    responsive: {
+                      rules: [
+                        {
+                          condition: {
+                            maxWidth: 25,
+                          },
+                        },
+                      ],
+                    },
+                    chart: {
+                      margin: 0,
+                      backgroundColor: "#1a1a1d",
+                    },
+                    series: [
+                      {
+                        data:success 
+                      },
+                    ],
+                    navigation: {
+                      buttonOptions: {
+                        enabled: false,
+                      },
+                    },
+                    rangeSelector: {
+                      enabled: false,
+                    },
+                    navigator: {
+                      enabled: false,
+                    },
+                    scrollbar: {
+                      enabled: false,
+                    },
+                    tooltip: { enabled: false },
+                    credits: {
+                      enabled: false,
+                    },
+                    xAxis: {
+                      lineWidth: 0,
+                      minorGridLineWidth: 0,
+                      lineColor: "transparent",
+                
+                      labels: {
+                        enabled: false,
+                      },
+                      minorTickLength: 0,
+                      tickLength: 0,
+                    },
+                
+                    yAxis: {
+                      gridLineWidth: 0,
+                      minorGridLineWidth: 0,
+                      labels: {
+                        enabled: false,
+                      },
+                      plotLines: [
+                        {
+                          value: 0,
+                          width: 0,
+                          color: "#aaa",
+                          zIndex: 10,
+                        },
+                      ],
+                
+                      stackLabels: {
+                        enabled: true,
+                      },
+                
+                    
+                
+                    
+                 
+                
+                
+                
+                    
+                }         })
+            
+            
+            
+            
+            
+            
+            
+                })}
+                    
+    
+                
+    
+    
+    
     
 }
 
 
 }
-export default new coinsView()
+
+export default new CoinsView()
