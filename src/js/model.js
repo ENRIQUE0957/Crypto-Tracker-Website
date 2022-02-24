@@ -45,7 +45,7 @@ export const loadCoins = async function(){
     
     
 }
-
+loadCoins()
 
     
    

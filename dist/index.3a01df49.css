@@ -26,6 +26,7 @@ background-image:linear-gradient(to right bottom,blue,white);
 font-family: 'Roboto', sans-serif;
 
 
+
 }
 .container{
     display:grid;
@@ -41,10 +42,19 @@ font-family: 'Roboto', sans-serif;
     padding:0rem 2rem
     
 }
+.coin-Supply{
+    font-size:1.2rem;
+    padding:1rem;
+    text-align:center;
+    font-weight:500;
+    width:20%;
+}
 .stats{
 display:flex;
 list-style:none;
-justify-content:space-evenly
+justify-content:space-evenly;
+font-family:'Roboto', sans-serif;
+color:#f7f7f7;
 
 
 }
@@ -61,30 +71,37 @@ justify-content:space-evenly
     height:7rem;
     box-shadow:0 2rem 6rem 0.5rem rgb(97 85 81 / 20%);
     margin-top:1rem;
-    margin-left:1rem;
+    margin-left:4rem;
 }
-.header-rank{
 
-}
 .header-price{
-margin-left:3rem
+margin-right:3rem;
 }
 .header-graph{
-    margin-left:2rem;
+   margin-right:3rem;
+}
+.header-rank{
+margin-right:3rem
+}
+.header-Markercap{
+margin-right:3rem
 }
 .header-name{
-    margin-left:8rem;
+    margin-right:15rem;
 }
 /*header crypto name and value styling*/
 .crypto-name{
     font-size:1.2rem;
     text-transform:uppercase;
+    cursor:pointer;
+
 
 
 }
 .crypto-value{
 font-size:1.2rem;
 text-align:center;
+cursor:pointer;
 }
 .container-header{
     padding:3rem 2rem;
@@ -95,13 +112,16 @@ text-align:center;
 .coins{
     display:flex;
     width:100%;
-    border-bottom:2px solid rgb(173, 172, 172)
+    border-bottom:2px solid rgb(173, 172, 172);
+    display:flex;
+    flex-direction:column;
+    list-style:none;
 }
 .coins-box{
     background-color:white;
     border-radius:50px;
-    width:70%;
-    margin-left:24rem;
+    width:84%;
+    margin-left:2rem;
 }
 .coin-row{
     display:flex;
@@ -120,11 +140,13 @@ text-align:center;
     display:flex;
     list-style: none;
     font-size:1.8rem;
-    justify-content: space-evenly;
+    margin-left:33rem;
     font-weight: 400;
     width:65%;
-    margin-left:25rem;
-
+    
+    color:#f7f7f7;
+    font-size:1.9rem;
+    column-gap: 6rem;
 }
 
 /*coins container styling*/
@@ -135,15 +157,24 @@ font-size:1.4rem;
 .name{
 padding:1rem;
 font-size:1.7rem;
+
 }
 .Volume-change{
     padding:1rem;
     align-self:center;
+    font-size:1.2rem;
+    font-weight:500;
+    margin-right:2rem
     
 }
 .price{
 padding:1rem;
 align-self: center;
+margin-right:4rem;
+font-size:1.2rem;
+font-weight:500;
+margin-right:3rem
+
 }
 .coin-image{
 height:5rem;
@@ -153,16 +184,33 @@ height:5rem;
     display:flex;
     align-content: center;
     align-items: center;
+    margin-right:10rem;
 }
 
 /*coin-stats*/
+.crypto{
+    display:flex;
+    gap:3rem;
+    margin-bottom:2rem;
+    align-content: space-around;
+    cursor: pointer;
+}
+.crypto:hover{
+    background-color:#dbdbdb56;
+    
+    
+}
 .crypto-Stats{
     display:flex;
     justify-content: space-evenly;
 
 }
+
 .coin-marketcap{
 align-self:center;
+font-size:1.2rem;
+font-weight:500;
+margin-right:2rem;
 }
 #myChart{
  height:300px;
@@ -172,5 +220,15 @@ align-self:center;
     
     
 
+}
+
+.coinsHeader{
+    padding:2rem 1rem;
+    text-transform:uppercase;
+    letter-spacing: 3px;
+    border-bottom: 1px solid black;
+    margin-bottom:3rem;
+    font-size :1.5rem;
+    text-align:center;
 }
 /*# sourceMappingURL=index.3a01df49.css.map */

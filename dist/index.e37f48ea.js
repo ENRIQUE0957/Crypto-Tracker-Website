@@ -587,6 +587,7 @@ const loadCoins = async function() {
     state.coins = resp2;
     console.log(state.coins);
 };
+loadCoins();
 
 },{"regenerator-Runtime":"15yAd","./helpers":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"15yAd":[function(require,module,exports) {
 /**
@@ -1290,7 +1291,7 @@ exports.default = new HeaderView();
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class CoinsView {
-    _parentElement = document.querySelector('.coins-box');
+    _parentElement = document.querySelector('.template');
     _c;
     render(c) {
         this._c = c;
@@ -1321,7 +1322,8 @@ class CoinsView {
         for(let j = 0; j < c1.length; j++){
             //markup that will be manipulated into html
             const markup = `
-        <li class = "crypto">
+      
+       <li class = "crypto">
         <div class = "crypto-ID">
         <img src = "${c1[j].icon}" alt = "image" class ="coin-image">
             <a class = "preview-link" href = "#"></a>
@@ -1331,43 +1333,54 @@ class CoinsView {
                 <span class = "rank">${c1[j].rank}</span>
                 </div>
                 
-                <span class = "Volume-change">${c1[j].volume} %</span>
+                <span class = "Volume-change">${c1[j].volume}%</span>
                 <span class = "coin-marketcap">
                     ${c1[j].marketCap.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'USD'
             })} 
                 </span>
+                
                 <span class = "price">
                     ${c1[j].price.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'USD'
             })}
                         </span>
-                        <div class="chart__container" id="container${j + 1}" style="width: 60%">
+                        <div class="chart__container" id="container${j + 1}" style="width: 13%">
                         </div>
+
+                        <span class = "coin-Supply">
+                        ${c1[j].totalSupply}M
+                        </span>
+                   
+
+                     
+                       
                 </li>
+                
                     
-    
+                     
                 `;
             //this will insert the crypto id as a paramater for our crypo array function we will use this in our graph data
             const graphArray = renderGraph(c1[j].id).then((success, err)=>{
                 if (err) console.log(err);
-                this._parentElement.insertAdjacentHTML('beforeend', markup);
+                this._parentElement.insertAdjacentHTML('afterend', markup);
                 //creating the chart for our container 
                 new Highcharts.stockChart(`container${j + 1}`, {
                     responsive: {
                         rules: [
                             {
                                 condition: {
-                                    maxWidth: 25
+                                    maxWidth: 10
                                 }
                             }, 
                         ]
                     },
                     chart: {
-                        margin: 0,
-                        backgroundColor: "#1a1a1d"
+                        margin: 1,
+                        backgroundColor: "white",
+                        marginRight: 40
                     },
                     series: [
                         {
@@ -1414,7 +1427,7 @@ class CoinsView {
                             {
                                 value: 0,
                                 width: 0,
-                                color: "#aaa",
+                                color: 'green',
                                 zIndex: 10
                             }, 
                         ],
