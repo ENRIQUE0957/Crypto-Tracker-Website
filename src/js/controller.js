@@ -39,3 +39,8 @@ document.addEventListener('DOMContentLoaded',async() =>{
 }
 
 renderCoins()
+
+
+const renderTrending = async function(){
+    //await model.getTrend()
+}

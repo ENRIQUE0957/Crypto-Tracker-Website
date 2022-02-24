@@ -55,9 +55,9 @@ loopOverCoins(c){
         <img src = "${c[j].icon}" alt = "image" class ="coin-image">
             <a class = "preview-link" href = "#"></a>
             <span class = "name">
-                     ${c[j].symbol}
+                     ${c[j].name}
                 </span>
-                <span class = "rank">${c[j].rank}</span>
+                <span class = "rank">${c[j].symbol}</span>
                 </div>
                 
                 <span class = "Volume-change">${c[j].volume}%</span>
@@ -77,10 +77,10 @@ loopOverCoins(c){
                         <div class="chart__container" id="container${j+1}" style="width: 13%">
                         </div>
 
+                       
                         <span class = "coin-Supply">
                         ${c[j].totalSupply}M
                         </span>
-                   
 
                      
                        
@@ -95,7 +95,7 @@ loopOverCoins(c){
                       console.log(err)
                     }
                 
-                this._parentElement.insertAdjacentHTML('afterend',markup)
+                this._parentElement.insertAdjacentHTML('beforeend',markup)
                 
 
                     //creating the chart for our container 

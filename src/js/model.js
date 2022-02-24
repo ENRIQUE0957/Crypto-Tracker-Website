@@ -4,7 +4,8 @@ import { getJSON } from './helpers'
 
 export const state = {
     headerStats:{},
-    coins:{}
+    coins:{},
+    trends:{}
 
 
 
@@ -47,7 +48,14 @@ export const loadCoins = async function(){
 }
 loadCoins()
 
-    
-   
+//we will be adding trending coins at the top 
+export const getTrend = async function(){
+const resp5  = await fetch('https://api.coingecko.com/api/v3/search/trending')
+const resp6 = await resp5.json()
+
+state.trends = resp6.coins
+console.log(state.trends)
+}
+getTrend()
     
 

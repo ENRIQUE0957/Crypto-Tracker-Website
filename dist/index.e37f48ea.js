@@ -544,6 +544,9 @@ const renderCoins = async function() {
     });
 };
 renderCoins();
+const renderTrending = async function() {
+//await model.getTrend()
+};
 
 },{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -554,12 +557,16 @@ parcelHelpers.export(exports, "getHeaderStats", ()=>getHeaderStats
 );
 parcelHelpers.export(exports, "loadCoins", ()=>loadCoins
 );
+parcelHelpers.export(exports, "getTrend", ()=>getTrend
+);
 var _regeneratorRuntime = require("regenerator-Runtime");
 var _helpers = require("./helpers");
 const state = {
     headerStats: {
     },
     coins: {
+    },
+    trends: {
     }
 };
 const getHeaderStats = async function() {
@@ -588,6 +595,13 @@ const loadCoins = async function() {
     console.log(state.coins);
 };
 loadCoins();
+const getTrend = async function() {
+    const resp5 = await fetch('https://api.coingecko.com/api/v3/search/trending');
+    const resp6 = await resp5.json();
+    state.trends = resp6.coins;
+    console.log(state.trends);
+};
+getTrend();
 
 },{"regenerator-Runtime":"15yAd","./helpers":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"15yAd":[function(require,module,exports) {
 /**
@@ -1328,9 +1342,9 @@ class CoinsView {
         <img src = "${c1[j].icon}" alt = "image" class ="coin-image">
             <a class = "preview-link" href = "#"></a>
             <span class = "name">
-                     ${c1[j].symbol}
+                     ${c1[j].name}
                 </span>
-                <span class = "rank">${c1[j].rank}</span>
+                <span class = "rank">${c1[j].symbol}</span>
                 </div>
                 
                 <span class = "Volume-change">${c1[j].volume}%</span>
@@ -1350,10 +1364,10 @@ class CoinsView {
                         <div class="chart__container" id="container${j + 1}" style="width: 13%">
                         </div>
 
+                       
                         <span class = "coin-Supply">
                         ${c1[j].totalSupply}M
                         </span>
-                   
 
                      
                        
@@ -1365,7 +1379,7 @@ class CoinsView {
             //this will insert the crypto id as a paramater for our crypo array function we will use this in our graph data
             const graphArray = renderGraph(c1[j].id).then((success, err)=>{
                 if (err) console.log(err);
-                this._parentElement.insertAdjacentHTML('afterend', markup);
+                this._parentElement.insertAdjacentHTML('beforeend', markup);
                 //creating the chart for our container 
                 new Highcharts.stockChart(`container${j + 1}`, {
                     responsive: {

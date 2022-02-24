@@ -117,11 +117,15 @@ cursor:pointer;
     flex-direction:column;
     list-style:none;
 }
+.container{
+    margin-top:17rem;
+}
 .coins-box{
     background-color:white;
     border-radius:50px;
     width:84%;
     margin-left:2rem;
+    
 }
 .coin-row{
     display:flex;
@@ -152,11 +156,12 @@ cursor:pointer;
 /*coins container styling*/
 .rank{
 padding:1rem;
-font-size:1.4rem;
+font-size:1.6rem;
 }
 .name{
 padding:1rem;
-font-size:1.7rem;
+font-size:1.6rem;
+padding-left:1.5rem;
 
 }
 .Volume-change{
@@ -230,5 +235,21 @@ margin-right:2rem;
     margin-bottom:3rem;
     font-size :1.5rem;
     text-align:center;
+}
+.template{
+    
+}
+.coinsHeader-list{
+display:flex;
+list-style: none;
+column-gap: 5rem;
+justify-content: center;
+font-size:1.4rem;
+}
+.coinsHeader-list__header{
+margin-right:21rem;
+}
+.coinsHeader-list__volume{
+    margin-right:3.8rem;
 }
 /*# sourceMappingURL=index.3a01df49.css.map */
