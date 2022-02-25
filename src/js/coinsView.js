@@ -105,7 +105,8 @@ loopOverCoins(c){
                       rules: [
                         {
                           condition: {
-                            maxWidth:10
+                            maxWidth:10,
+                            
                           },
                         },
                       ],
@@ -113,7 +114,9 @@ loopOverCoins(c){
                     chart: {
                       margin: 1,
                       backgroundColor: "white",
-                      marginRight:40
+                     
+                      
+                      
                     },
                     series: [
                       {

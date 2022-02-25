@@ -525,6 +525,8 @@ var _headerViewJs = require("./headerView.js");
 var _headerViewJsDefault = parcelHelpers.interopDefault(_headerViewJs);
 var _coinsViewJs = require("./coinsView.js");
 var _coinsViewJsDefault = parcelHelpers.interopDefault(_coinsViewJs);
+var _trendingCoinsJs = require("./TrendingCoins.js");
+var _trendingCoinsJsDefault = parcelHelpers.interopDefault(_trendingCoinsJs);
 const parentElement = document.querySelector('.coins-box');
 const RenderHeader = async function() {
     //fetching getting the object with the data we need
@@ -545,10 +547,12 @@ const renderCoins = async function() {
 };
 renderCoins();
 const renderTrending = async function() {
-//await model.getTrend()
+    await _modelJs.getTrend();
+    _trendingCoinsJsDefault.default.render(_modelJs.state.trends);
 };
+renderTrending();
 
-},{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
+},{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./TrendingCoins.js":"brdS8"}],"Y4A21":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state
@@ -601,7 +605,6 @@ const getTrend = async function() {
     state.trends = resp6.coins;
     console.log(state.trends);
 };
-getTrend();
 
 },{"regenerator-Runtime":"15yAd","./helpers":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"15yAd":[function(require,module,exports) {
 /**
@@ -1393,8 +1396,7 @@ class CoinsView {
                     },
                     chart: {
                         margin: 1,
-                        backgroundColor: "white",
-                        marginRight: 40
+                        backgroundColor: "white"
                     },
                     series: [
                         {
@@ -1455,6 +1457,43 @@ class CoinsView {
     }
 }
 exports.default = new CoinsView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"brdS8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class coinsTrending {
+    _parentElement = document.querySelector('.container-header');
+    _data;
+    render(data) {
+        this._data = data;
+        console.log(this._data);
+        this.GenerateMarkup(data);
+    }
+    GenerateMarkup(data) {
+        for(let c = 0; c <= 2; c++){
+            //you have the markup now you just have to add the properties for the coins in the specific elements 
+            const markup = `
+        <div class = "trending-Container">
+        <h2 class = "Trending-Coin-Title">
+            ${data[c].item.name}
+        </h2>
+        <div class = "Trending-img">
+            <img class = "Trending-img" src = ${data[c].item.small}>
+        </div>
+        <h3 class = "Trending-Coin-ID">
+            ${data[c].item.symbol}
+        </h3>
+        <span class ="Trending-market-Rank">
+        Rank
+        ${data[c].item.market_cap_rank}
+        </span>
+        </div>
+    `;
+            this._parentElement.insertAdjacentHTML('beforeend', markup);
+        }
+    }
+}
+exports.default = new coinsTrending();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ddCAb","aenu9"], "aenu9", "parcelRequirefb07")
 

@@ -1,6 +1,8 @@
 import * as model from './model.js'
 import headerView from './headerView.js'
 import coinsView from './coinsView.js'
+import coinsTrending from './TrendingCoins.js'
+
 const parentElement = document.querySelector('.coins-box')
 const RenderHeader =async function(){
     //fetching getting the object with the data we need
@@ -42,5 +44,10 @@ renderCoins()
 
 
 const renderTrending = async function(){
-    //await model.getTrend()
+    await model.getTrend()
+
+
+    coinsTrending.render(model.state.trends)
 }
+
+renderTrending()

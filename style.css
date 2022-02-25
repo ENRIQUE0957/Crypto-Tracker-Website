@@ -104,8 +104,8 @@ text-align:center;
 cursor:pointer;
 }
 .container-header{
-    padding:3rem 2rem;
-    margin-top:9rem;
+    
+    margin-top:3.5rem;
 }
 
 /*coins box*/
@@ -251,4 +251,21 @@ margin-right:21rem;
 }
 .coinsHeader-list__volume{
     margin-right:3.8rem;
+}
+/*styling for the trending coins*/
+.trending-Container{
+    padding:0.6rem;
+    background-color:rgba(255, 255, 255, 0.26);
+}
+.Trending-Coins-Title{
+
+}
+.Trending-img{
+
+}
+.Trending-Coin-ID{
+
+}
+.Trending-market-Rank{
+
 }

@@ -56,6 +56,6 @@ const resp6 = await resp5.json()
 state.trends = resp6.coins
 console.log(state.trends)
 }
-getTrend()
+
     
 
