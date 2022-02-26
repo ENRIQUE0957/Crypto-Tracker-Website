@@ -104,8 +104,10 @@ text-align:center;
 cursor:pointer;
 }
 .container-header{
-    
-    margin-top:3.5rem;
+    display:flex;
+    margin-top:4.5rem;
+    margin-right:18rem;
+    justify-content:space-evenly;
 }
 
 /*coins box*/
@@ -254,17 +256,33 @@ margin-right:21rem;
 }
 /*styling for the trending coins*/
 .trending-Container{
-    padding:0.6rem;
-    background-color:rgba(255, 255, 255, 0.26);
+    padding:6.5rem 8rem;
+    background-color:white;
+    border-radius: 13px;
+    position: relative;
+    font-family:Roboto;
+
 }
-.Trending-Coins-Title{
+.Trending-Coin-Title{
+    position:absolute;
+    left:3%;
+    top:0%;
+    font-size:2rem
+
 
 }
 .Trending-img{
+position:absolute;
+left:3%;
+top:26%;
+border-radius:22px;
 
 }
 .Trending-Coin-ID{
-
+position:absolute;
+left:3%;
+top:70%;
+font-size:1.4rem;
 }
 .Trending-market-Rank{
 
