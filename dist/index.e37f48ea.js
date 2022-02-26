@@ -552,7 +552,7 @@ const renderTrending = async function() {
 };
 renderTrending();
 
-},{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./TrendingCoins.js":"brdS8"}],"Y4A21":[function(require,module,exports) {
+},{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","./TrendingCoins.js":"brdS8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state
@@ -1470,7 +1470,7 @@ class coinsTrending {
         this.GenerateMarkup(data);
     }
     GenerateMarkup(data) {
-        for(let c = 0; c <= 2; c++){
+        for(let c = 0; c <= 3; c++){
             //you have the markup now you just have to add the properties for the coins in the specific elements 
             const markup = `
         <div class = "trending-Container">
@@ -1487,7 +1487,12 @@ class coinsTrending {
         Rank
         ${data[c].item.market_cap_rank}
         </span>
+        <span class = "Trending-priceInBTC">
+        BTC :
+        ${data[c].item.price_btc}
+        </span>
         </div>
+        
     `;
             this._parentElement.insertAdjacentHTML('beforeend', markup);
         }

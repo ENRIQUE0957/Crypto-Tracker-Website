@@ -24,6 +24,7 @@ background-repeat: no-repeat;
 min-height:100vh;
 background-image:linear-gradient(to right bottom,blue,white);
 font-family: 'Roboto', sans-serif;
+position:relative;
 
 
 
@@ -68,12 +69,21 @@ color:#f7f7f7;
 }
 .header-logo{
     border-radius:100rem;
-    height:7rem;
-    box-shadow:0 2rem 6rem 0.5rem rgb(97 85 81 / 20%);
+    height:7.9rem;
+    box-shadow:0 2rem 6rem 2.5rem rgb(97 85 81 / 20%);
     margin-top:1rem;
     margin-left:4rem;
+    background-image:linear-gradient(to right bottom,blue,white);
 }
-
+.website-title{
+    position:absolute;
+    top:1%;
+    left:7%;
+    color:white;
+    font-family:Roboto;
+    font-weight:600;
+    font-size:1.9rem
+}
 .header-price{
 margin-right:3rem;
 }
@@ -107,7 +117,8 @@ cursor:pointer;
     display:flex;
     margin-top:4.5rem;
     margin-right:18rem;
-    justify-content:space-evenly;
+    justify-content:center;
+    column-gap:4rem;
 }
 
 /*coins box*/
@@ -256,18 +267,24 @@ margin-right:21rem;
 }
 /*styling for the trending coins*/
 .trending-Container{
-    padding:6.5rem 8rem;
+    padding:8.5rem 10.4rem;
     background-color:white;
     border-radius: 13px;
     position: relative;
     font-family:Roboto;
+   border:1px solid rgb(161, 161, 161);
+   cursor:pointer;
 
+}
+.trending-Container:hover{
+    background-color:rgba(255, 255, 255, 0.842);
 }
 .Trending-Coin-Title{
     position:absolute;
     left:3%;
     top:0%;
-    font-size:2rem
+    font-size:2rem;
+    font-weight:600;
 
 
 }
@@ -283,7 +300,19 @@ position:absolute;
 left:3%;
 top:70%;
 font-size:1.4rem;
+font-weight:600;
 }
 .Trending-market-Rank{
-
+position:absolute;
+top:17%;
+left:50%;
+font-size:1.2rem
+}
+.Trending-priceInBTC{
+    position:absolute;
+    top:80%;
+    left:3%;
+    font-weight:600;
+    font-size:1.1rem;
+    color:blue;
 }
