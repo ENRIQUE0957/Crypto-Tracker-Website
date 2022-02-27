@@ -40,7 +40,9 @@ position:relative;
 
 .header{
     
-    padding:0rem 2rem
+    padding:0rem 2rem;
+    float:right;
+    margin-right:6rem;
     
 }
 .coin-Supply{
@@ -60,7 +62,9 @@ color:#f7f7f7;
 
 }
 .list-item{
-    border-bottom:1px solid white
+    border-bottom:1px solid white;
+    margin-right:23.6rem;
+    margin-top:0.5rem;
     
 }
 .list-item:hover{
@@ -71,14 +75,14 @@ color:#f7f7f7;
     border-radius:100rem;
     height:7.9rem;
     box-shadow:0 2rem 6rem 2.5rem rgb(97 85 81 / 20%);
-    margin-top:1rem;
-    margin-left:4rem;
+    margin-top:5rem;
+    margin-left:2rem;
     background-image:linear-gradient(to right bottom,blue,white);
 }
 .website-title{
     position:absolute;
-    top:1%;
-    left:7%;
+    top:3%;
+    left:5.8%;
     color:white;
     font-family:Roboto;
     font-weight:600;
@@ -115,7 +119,7 @@ cursor:pointer;
 }
 .container-header{
     display:flex;
-    margin-top:4.5rem;
+    margin-top:6.5rem;
     margin-right:18rem;
     justify-content:center;
     column-gap:4rem;
@@ -304,9 +308,11 @@ font-weight:600;
 }
 .Trending-market-Rank{
 position:absolute;
-top:17%;
+top:20%;
 left:50%;
-font-size:1.2rem
+font-size:1.6rem;
+font-weight:600;
+right:30%;
 }
 .Trending-priceInBTC{
     position:absolute;
@@ -315,4 +321,5 @@ font-size:1.2rem
     font-weight:600;
     font-size:1.1rem;
     color:blue;
+    margin-top:1rem;
 }

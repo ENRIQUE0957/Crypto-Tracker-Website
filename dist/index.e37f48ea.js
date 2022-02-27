@@ -1241,7 +1241,7 @@ class HeaderView {
         this._data = data;
         const markup = this._GenerateMarkup();
         this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markup);
+        this._parentElement.insertAdjacentHTML('beforeend', markup);
         console.log(this._data);
     }
     _clear() {
@@ -1484,8 +1484,8 @@ class coinsTrending {
             ${data[c].item.symbol}
         </h3>
         <span class ="Trending-market-Rank">
-        Rank
-        ${data[c].item.market_cap_rank}
+        Trending Coin:${data[c].item.score + 1}
+        
         </span>
         <span class = "Trending-priceInBTC">
         BTC :

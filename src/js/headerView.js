@@ -7,7 +7,7 @@ render(data){
 this._data = data;
 const markup = this._GenerateMarkup();
 this._clear()
-this._parentElement.insertAdjacentHTML("afterbegin",markup)
+this._parentElement.insertAdjacentHTML('beforeend',markup)
 console.log(this._data)
 }
 

@@ -27,8 +27,8 @@ GenerateMarkup(data){
             ${data[c].item.symbol}
         </h3>
         <span class ="Trending-market-Rank">
-        Rank
-        ${data[c].item.market_cap_rank}
+        Trending Coin:${data[c].item.score+1}
+        
         </span>
         <span class = "Trending-priceInBTC">
         BTC :
