@@ -86,7 +86,11 @@ color:#f7f7f7;
     color:white;
     font-family:Roboto;
     font-weight:600;
-    font-size:1.9rem
+    font-size:1.9rem;
+    letter-spacing:1px;
+    
+ 
+    
 }
 .header-price{
 margin-right:3rem;
@@ -305,6 +309,7 @@ left:3%;
 top:70%;
 font-size:1.4rem;
 font-weight:600;
+letter-spacing:1px
 }
 .Trending-market-Rank{
 position:absolute;
@@ -322,5 +327,40 @@ right:30%;
     font-size:1.1rem;
     color:blue;
     margin-top:1rem;
+}
+
+.footer{
+  padding:20rem 10rem;
+  margin-top:11rem;
+    
+}
+.website-title-1{
+    color:white;
+    font-family:Roboto;
+    font-weight:600;
+    font-size:1.9rem;
+    letter-spacing:1px;
+}
+.contact-us{
+
+}
+.services{
+list-style:none;
+display:flex;
+column-gap:1.6rem;
+margin-top:8rem;
+
+}
+.footer-service:hover{
+    background-color:rgba(228, 228, 228, 0.726);
+    cursor:pointer
+}
+.footer-service{
+color:rgb(48, 48, 48);
+font-size:1.9rem;
+letter-spacing:1px;
+font-family:Roboto;
+font-weight:600;
+
 }
 /*# sourceMappingURL=index.3a01df49.css.map */
