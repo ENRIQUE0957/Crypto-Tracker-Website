@@ -563,6 +563,8 @@ parcelHelpers.export(exports, "loadCoins", ()=>loadCoins
 );
 parcelHelpers.export(exports, "getTrend", ()=>getTrend
 );
+parcelHelpers.export(exports, "GetPageNumber", ()=>GetPageNumber
+);
 var _regeneratorRuntime = require("regenerator-Runtime");
 var _helpers = require("./helpers");
 const state = {
@@ -571,6 +573,11 @@ const state = {
     coins: {
     },
     trends: {
+    },
+    getSeachResultsPage: {
+        results: [],
+        page: 1,
+        resultsPerPage: 12
     }
 };
 const getHeaderStats = async function() {
@@ -593,7 +600,7 @@ const getHeaderStats = async function() {
     }
 };
 const loadCoins = async function() {
-    const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=30&currency=EUR');
+    const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=50&currency=EUR');
     const resp2 = await resp1.json();
     state.coins = resp2;
     console.log(state.coins);
@@ -604,6 +611,12 @@ const getTrend = async function() {
     const resp6 = await resp5.json();
     state.trends = resp6.coins;
     console.log(state.trends);
+};
+const GetPageNumber = function(page = state.getSeachResultsPage.page) {
+    state.getSeachResultsPage.page = page;
+    const start = (page - 1) * state.getSeachResultsPage.resultsPerPage;
+    const end = page * resultsPerPage;
+    return state.getSeachResultsPage.results.slice(start, end);
 };
 
 },{"regenerator-Runtime":"15yAd","./helpers":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"15yAd":[function(require,module,exports) {
@@ -1349,7 +1362,7 @@ class CoinsView {
                 </span>
                 <span class = "rank">${c1[j].symbol}</span>
                 </div>
-                
+              <div class = "coin-ID">
                 <span class = "Volume-change">${c1[j].volume}%</span>
                 <span class = "coin-marketcap">
                     ${c1[j].marketCap.toLocaleString('en-US', {
@@ -1364,15 +1377,16 @@ class CoinsView {
                 currency: 'USD'
             })}
                         </span>
-                        <div class="chart__container" id="container${j + 1}" style="width: 13%">
-                        </div>
+                        
 
                        
                         <span class = "coin-Supply">
                         ${c1[j].totalSupply}M
                         </span>
 
-                     
+                     </div>
+                     <div class="chart__container" id="container${j + 1}" style="width: 30%">
+                        </div>
                        
                 </li>
                 
@@ -1395,7 +1409,8 @@ class CoinsView {
                         ]
                     },
                     chart: {
-                        margin: 1,
+                        marginRight: 1,
+                        padding: 1,
                         backgroundColor: "white"
                     },
                     series: [

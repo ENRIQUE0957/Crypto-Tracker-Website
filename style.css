@@ -75,7 +75,7 @@ color:#f7f7f7;
     border-radius:100rem;
     height:7.9rem;
     box-shadow:0 2rem 6rem 2.5rem rgb(97 85 81 / 20%);
-    margin-top:5rem;
+    margin-top:6.6rem;
     margin-left:2rem;
     background-image:linear-gradient(to right bottom,blue,white);
 }
@@ -210,7 +210,12 @@ height:5rem;
     display:flex;
     align-content: center;
     align-items: center;
-    margin-right:10rem;
+    margin-right:6.3rem;
+}
+.coin-ID{
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 /*coin-stats*/
@@ -249,13 +254,21 @@ margin-right:2rem;
 }
 
 .coinsHeader{
-    padding:2rem 1rem;
+    padding:3rem 1rem;
     text-transform:uppercase;
     letter-spacing: 3px;
     border-bottom: 1px solid black;
     margin-bottom:3rem;
     font-size :1.5rem;
     text-align:center;
+    position: sticky;
+    top:0px;
+    bottom:10px;
+    background-color:#f7f7f7;
+    border-radius:10px;
+    z-index:100;
+    
+    
 }
 .template{
     
@@ -266,6 +279,7 @@ list-style: none;
 column-gap: 5rem;
 justify-content: center;
 font-size:1.4rem;
+
 }
 .coinsHeader-list__header{
 margin-right:21rem;
@@ -276,7 +290,7 @@ margin-right:21rem;
 /*styling for the trending coins*/
 .trending-Container{
     padding:8.5rem 10.4rem;
-    background-color:white;
+    background-color:#ffffffeb;
     border-radius: 13px;
     position: relative;
     font-family:Roboto;
@@ -318,6 +332,7 @@ left:50%;
 font-size:1.6rem;
 font-weight:600;
 right:30%;
+opacity:0;
 }
 .Trending-priceInBTC{
     position:absolute;
@@ -331,7 +346,8 @@ right:30%;
 
 .footer{
   padding:20rem 10rem;
-  margin-top:11rem;
+  margin-top:40rem;
+  position:relative
     
 }
 .website-title-1{
@@ -361,5 +377,27 @@ font-size:1.9rem;
 letter-spacing:1px;
 font-family:Roboto;
 font-weight:600;
+
+}
+.mentiones{
+position:absolute;
+top:53%;
+left:70%;
+font-size:1.6rem;
+font-size:1.6rem
+}
+.paragraph-mentiones{
+margin-bottom:2.5rem;
+}
+.bottom-paragraph{
+margin-bottom:2.5rem
+}
+.footer-logo{
+    border-radius:100rem;
+    height:5rem;
+    box-shadow: 0 2rem 6rem 2.5rem rgb(97 85 81 / 20%);
+    position: absolute;
+    top:34%;
+    left:2%
 
 }

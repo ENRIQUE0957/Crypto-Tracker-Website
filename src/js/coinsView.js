@@ -59,7 +59,7 @@ loopOverCoins(c){
                 </span>
                 <span class = "rank">${c[j].symbol}</span>
                 </div>
-                
+              <div class = "coin-ID">
                 <span class = "Volume-change">${c[j].volume}%</span>
                 <span class = "coin-marketcap">
                     ${c[j].marketCap.toLocaleString('en-US', {
@@ -74,15 +74,16 @@ loopOverCoins(c){
                         currency: 'USD',
                       })}
                         </span>
-                        <div class="chart__container" id="container${j+1}" style="width: 13%">
-                        </div>
+                        
 
                        
                         <span class = "coin-Supply">
                         ${c[j].totalSupply}M
                         </span>
 
-                     
+                     </div>
+                     <div class="chart__container" id="container${j+1}" style="width: 30%">
+                        </div>
                        
                 </li>
                 
@@ -112,7 +113,8 @@ loopOverCoins(c){
                       ],
                     },
                     chart: {
-                      margin: 1,
+                      marginRight: 1,
+                      padding:1,
                       backgroundColor: "white",
                      
                       
