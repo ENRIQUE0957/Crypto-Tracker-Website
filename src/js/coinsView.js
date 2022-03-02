@@ -113,7 +113,7 @@ loopOverCoins(c){
                       ],
                     },
                     chart: {
-                      marginRight: 1,
+                      marginRight: 2,
                       padding:1,
                       backgroundColor: "white",
                      

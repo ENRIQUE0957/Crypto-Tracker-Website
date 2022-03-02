@@ -2,6 +2,7 @@ import * as model from './model.js'
 import headerView from './headerView.js'
 import coinsView from './coinsView.js'
 import coinsTrending from './TrendingCoins.js'
+import PaginationView from './PaginationView.js'
 
 const parentElement = document.querySelector('.coins-box')
 const RenderHeader =async function(){
@@ -35,7 +36,9 @@ document.addEventListener('DOMContentLoaded',async() =>{
 
 
     //rendering the data
-    coinsView.render(model.state.coins.coins)
+    coinsView.render(model.GetPageNumber(2))
+
+    PaginationView.render(model.state.getSeachResultsPage)
 
 })
 }

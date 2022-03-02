@@ -144,7 +144,7 @@ cursor:pointer;
 .coins-box{
     background-color:white;
     border-radius:50px;
-    width:84%;
+    width:88%;
     margin-left:2rem;
     
 }
@@ -400,4 +400,22 @@ margin-bottom:2.5rem
     top:34%;
     left:2%
 
+}
+
+/* button layout fot pagination*/
+.pagination{
+    display:flex;
+    column-gap: 30rem;
+    justify-content: center;
+    padding:2.6rem;
+    
+}
+.btn--inline{
+    border-radius:10px;
+    padding:0.8rem 0.9rem;
+    
+}
+.search__icon{
+    height:2.6rem;
+    width:14rem;
 }
