@@ -538,22 +538,45 @@ const RenderHeader = async function() {
 //here we used the mvc paradigm 
 };
 RenderHeader();
-//rendering our coins 
-const renderCoins = async function() {
-    document.addEventListener('DOMContentLoaded', async ()=>{
-        //getting the object we are using as a parameter
-        await _modelJs.loadCoins();
-        //rendering the data
-        _coinsViewJsDefault.default.render(_modelJs.GetPageNumber(2));
-        _paginationViewJsDefault.default.render(_modelJs.state.getSeachResultsPage);
-    });
-};
-renderCoins();
+//rendering the trend cards in the header
 const renderTrending = async function() {
     await _modelJs.getTrend();
     _trendingCoinsJsDefault.default.render(_modelJs.state.trends);
 };
-renderTrending();
+//renderTrending()
+//rendering our coins 
+//using promises
+const renderCoins = async function() {
+    await _modelJs.loadCoins();
+    _coinsViewJsDefault.default.render(_modelJs.GetPageNumber(4));
+    _paginationViewJsDefault.default.render(_modelJs.state.getSeachResultsPage);
+};
+//function to take the parameter for the button event in the adaHandler function 
+const controlPagination = function(goToPage) {
+    _coinsViewJsDefault.default.render(_modelJs.GetPageNumber(goToPage));
+    _paginationViewJsDefault.default.render(_modelJs.state.getSeachResultsPage);
+};
+const init = function() {
+    _paginationViewJsDefault.default.adaHandlerClick(controlPagination);
+    renderCoins();
+    renderTrending();
+};
+init(); /*
+const renderCoins = function(goToPage){
+//document.addEventListener('DOMContentLoaded',async() =>{
+        //loading the object we need as a parameter
+        await model.loadCoins()
+     
+        //rendering the data with the number we got from adaHandle to render the coins
+        coinsView.render(model.GetPageNumber(goToPage))
+        //rendering the object we got from loadCoins with the method getseachResultPage
+        paginationView.render(model.state.getSeachResultsPage)
+
+       
+
+}
+//renderCoins()
+*/ 
 
 },{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","./TrendingCoins.js":"brdS8","./PaginationView.js":"4hMAX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -573,15 +596,12 @@ var _helpers = require("./helpers");
 const state = {
     headerStats: {
     },
-    coins: {
-    },
     trends: {
     },
     getSeachResultsPage: {
         page: 1,
         resultsPerPage: 12,
-        coins: {
-        }
+        coins: []
     }
 };
 const getHeaderStats = async function() {
@@ -606,7 +626,7 @@ const getHeaderStats = async function() {
 const loadCoins = async function() {
     const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=60&currency=EUR');
     const resp2 = await resp1.json();
-    state.getSeachResultsPage.coins = resp2;
+    state.getSeachResultsPage.coins = resp2.coins;
     console.log(state.getSeachResultsPage.coins);
 };
 loadCoins();
@@ -620,7 +640,7 @@ const GetPageNumber = function(page = state.getSeachResultsPage.page) {
     state.getSeachResultsPage.page = page;
     const start = (page - 1) * state.getSeachResultsPage.resultsPerPage;
     const end = page * state.getSeachResultsPage.resultsPerPage;
-    return state.getSeachResultsPage.coins.coins.slice(start, end);
+    return state.getSeachResultsPage.coins.slice(start, end);
 };
 
 },{"regenerator-Runtime":"15yAd","./helpers":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"15yAd":[function(require,module,exports) {
@@ -1522,62 +1542,65 @@ exports.default = new coinsTrending();
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4hMAX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-class pagionationView {
+class paginationView {
     _parentElement = document.querySelector('.pagination');
     _data;
+    adaHandlerClick(handler) {
+        this._parentElement.addEventListener('click', function(e) {
+            const btn = e.target.closest('.btn--inline');
+            if (!btn) return;
+            const goToPage = +btn.dataset.goto //getting the number of the button
+            ;
+            console.log(goToPage);
+            handler(goToPage) //calling the control function and passing in that pagination number
+            ;
+        });
+    }
     render(data) {
         if (!data || Array.isArray(data) && data.length === 0) return this.errorMessage();
         this._data = data;
         const markup = this._generateMarkup();
         this._parentElement.insertAdjacentHTML('afterbegin', markup);
     }
-    adaHandler(handler) {
-        this._parentElement.addEventListener('click', function(e) {
-            const btn = e.target.closest('.btn--inline');
-            console.log(btn);
-            if (!btn) return;
-            const goToPage = btn.dataset.goto //getting the button number 
-            ;
-            handler(goToPage) //calling the controlPagination function to essentially change the number when pressed 
-            ;
-        });
-    }
     _generateMarkup() {
         //getting the current page and the number of pages 
         const curPage = this._data.page;
-        const numPages = this._data.coins.coins.length / this._data.resultsPerPage;
+        const numPages = this._data.coins.length / this._data.resultsPerPage;
         //page1 and there is other pages
         if (curPage == 1 && numPages > 1) return `
-            <button data-goto = "${curPage + 1}" class="btn--inline pagination__btn--next">
+            <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next">
             <span>Page ${curPage + 1}</span>
             <svg class="search__icon">
               <use href=#icon-arrow-right"></use>
             </svg>
           </button>`;
         //last page
-        if (curPage == numPages && numPages > 1) return `button data-goto = "${curPage - 1}"class="btn--inline pagination__btn--prev">
+        if (curPage == numPages && numPages > 1) return `
+            button data-goto="${curPage - 1}"class="btn--inline pagination__btn--prev">
             <svg class="search__icon">
               <use href="src/img/icons.svg#icon-arrow-left"></use>
             </svg>
             <span>Page ${curPage - 1}</span>
           </button>`;
         //other page
-        if (curPage < numPages) return `<button data-goto = "${curPage - 1}"class="btn--inline pagination__btn--prev">
+        if (curPage < numPages) return `
+            <button data-goto = "${curPage - 1}"class="btn--inline pagination__btn--prev">
             <svg class="search__icon">
               <use href="src/img/icons.svg#icon-arrow-left"></use>
             </svg>
             <span>Page ${curPage - 1}</span>
           </button>
+            
           <button data-goto = "${curPage + 1}"class="btn--inline pagination__btn--next">
             <span>Page ${curPage + 1}</span>
             <svg class="search__icon">
               <use href="src/img/icons.svg#icon-arrow-right"></use>
             </svg>
           </button>
-            `;
+          `;
     }
 }
-exports.default = new pagionationView();
+exports.default = new paginationView();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ddCAb","aenu9"], "aenu9", "parcelRequirefb07")
 
