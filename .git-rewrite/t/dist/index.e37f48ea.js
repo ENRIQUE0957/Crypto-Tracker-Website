@@ -525,10 +525,6 @@ var _headerViewJs = require("./headerView.js");
 var _headerViewJsDefault = parcelHelpers.interopDefault(_headerViewJs);
 var _coinsViewJs = require("./coinsView.js");
 var _coinsViewJsDefault = parcelHelpers.interopDefault(_coinsViewJs);
-var _trendingCoinsJs = require("./TrendingCoins.js");
-var _trendingCoinsJsDefault = parcelHelpers.interopDefault(_trendingCoinsJs);
-var _paginationViewJs = require("./PaginationView.js");
-var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 const parentElement = document.querySelector('.coins-box');
 const RenderHeader = async function() {
     //fetching getting the object with the data we need
@@ -544,18 +540,12 @@ const renderCoins = async function() {
         //getting the object we are using as a parameter
         await _modelJs.loadCoins();
         //rendering the data
-        _coinsViewJsDefault.default.render(_modelJs.GetPageNumber(2));
-        _paginationViewJsDefault.default.render(_modelJs.state.getSeachResultsPage);
+        _coinsViewJsDefault.default.render(_modelJs.state.coins.coins);
     });
 };
 renderCoins();
-const renderTrending = async function() {
-    await _modelJs.getTrend();
-    _trendingCoinsJsDefault.default.render(_modelJs.state.trends);
-};
-renderTrending();
 
-},{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","./TrendingCoins.js":"brdS8","./PaginationView.js":"4hMAX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
+},{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state
@@ -564,21 +554,12 @@ parcelHelpers.export(exports, "getHeaderStats", ()=>getHeaderStats
 );
 parcelHelpers.export(exports, "loadCoins", ()=>loadCoins
 );
-parcelHelpers.export(exports, "getTrend", ()=>getTrend
-);
-parcelHelpers.export(exports, "GetPageNumber", ()=>GetPageNumber
-);
 var _regeneratorRuntime = require("regenerator-Runtime");
 var _helpers = require("./helpers");
 const state = {
     headerStats: {
     },
-    trends: {
-    },
-    getSeachResultsPage: {
-        page: 1,
-        resultsPerPage: 12,
-        coins: []
+    coins: {
     }
 };
 const getHeaderStats = async function() {
@@ -601,24 +582,28 @@ const getHeaderStats = async function() {
     }
 };
 const loadCoins = async function() {
-    const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=60&currency=EUR');
+    const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=30&currency=EUR');
     const resp2 = await resp1.json();
-    state.getSeachResultsPage.coins = resp2.coins;
-    console.log(state.getSeachResultsPage.coins);
-};
-loadCoins();
-const getTrend = async function() {
-    const resp5 = await fetch('https://api.coingecko.com/api/v3/search/trending');
-    const resp6 = await resp5.json();
-    state.trends = resp6.coins;
-    console.log(state.trends);
-};
-const GetPageNumber = function(page = state.getSeachResultsPage.page) {
-    state.getSeachResultsPage.page = page;
-    const start = (page - 1) * state.getSeachResultsPage.resultsPerPage;
-    const end = page * state.getSeachResultsPage.resultsPerPage;
-    return state.getSeachResultsPage.coins.slice(start, end);
-};
+    state.coins = resp2;
+    console.log(state.coins);
+} /*
+export const getGraph =async function(){
+    try{
+    const resp2 = await getJSON('https://api.coinstats.app/public/v1/charts?period=1m&coinId=ethereum')
+    crypto.graph = resp2;
+    console.log(resp2)
+    state.crypto.graph={
+
+    }
+    
+
+
+}catch(err){
+        alert(err)
+    }
+}
+getGraph()
+*/ ;
 
 },{"regenerator-Runtime":"15yAd","./helpers":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"15yAd":[function(require,module,exports) {
 /**
@@ -1255,7 +1240,7 @@ class HeaderView {
         this._data = data;
         const markup = this._GenerateMarkup();
         this._clear();
-        this._parentElement.insertAdjacentHTML('beforeend', markup);
+        this._parentElement.insertAdjacentHTML("afterbegin", markup);
         console.log(this._data);
     }
     _clear() {
@@ -1322,7 +1307,7 @@ exports.default = new HeaderView();
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class CoinsView {
-    _parentElement = document.querySelector('.template');
+    _parentElement = document.querySelector('.coins-box');
     _c;
     render(c) {
         this._c = c;
@@ -1353,46 +1338,34 @@ class CoinsView {
         for(let j = 0; j < c1.length; j++){
             //markup that will be manipulated into html
             const markup = `
-      
-       <li class = "crypto">
+        <li class = "crypto">
         <div class = "crypto-ID">
         <img src = "${c1[j].icon}" alt = "image" class ="coin-image">
             <a class = "preview-link" href = "#"></a>
             <span class = "name">
-                     ${c1[j].name}
+                     ${c1[j].symbol}
                 </span>
-                <span class = "rank">${c1[j].symbol}</span>
+                <span class = "rank">${c1[j].rank}</span>
                 </div>
-              <div class = "coin-ID">
-                <span class = "Volume-change">${c1[j].volume}%</span>
+                
+                <span class = "Volume-change">${c1[j].volume} %</span>
                 <span class = "coin-marketcap">
                     ${c1[j].marketCap.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'USD'
             })} 
                 </span>
-                
                 <span class = "price">
                     ${c1[j].price.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'USD'
             })}
                         </span>
-                        
-
-                       
-                        <span class = "coin-Supply">
-                        ${c1[j].totalSupply}M
-                        </span>
-
-                     </div>
-                     <div class="chart__container" id="container${j + 1}" style="width: 30%">
+                        <div class="chart__container" id="container${j + 1}" style="width: 60%">
                         </div>
-                       
                 </li>
-                
                     
-                     
+    
                 `;
             //this will insert the crypto id as a paramater for our crypo array function we will use this in our graph data
             const graphArray = renderGraph(c1[j].id).then((success, err)=>{
@@ -1404,15 +1377,14 @@ class CoinsView {
                         rules: [
                             {
                                 condition: {
-                                    maxWidth: 10
+                                    maxWidth: 25
                                 }
                             }, 
                         ]
                     },
                     chart: {
-                        marginRight: 2,
-                        padding: 1,
-                        backgroundColor: "white"
+                        margin: 0,
+                        backgroundColor: "#1a1a1d"
                     },
                     series: [
                         {
@@ -1459,7 +1431,7 @@ class CoinsView {
                             {
                                 value: 0,
                                 width: 0,
-                                color: 'green',
+                                color: "#aaa",
                                 zIndex: 10
                             }, 
                         ],
@@ -1473,108 +1445,6 @@ class CoinsView {
     }
 }
 exports.default = new CoinsView();
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"brdS8":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-class coinsTrending {
-    _parentElement = document.querySelector('.container-header');
-    _data;
-    render(data) {
-        this._data = data;
-        console.log(this._data);
-        this.GenerateMarkup(data);
-    }
-    GenerateMarkup(data) {
-        for(let c = 0; c <= 3; c++){
-            //you have the markup now you just have to add the properties for the coins in the specific elements 
-            const markup = `
-        <div class = "trending-Container">
-        <h2 class = "Trending-Coin-Title">
-            ${data[c].item.name}
-        </h2>
-        <div class = "Trending-img">
-            <img class = "Trending-img" src = ${data[c].item.small}>
-        </div>
-        <h3 class = "Trending-Coin-ID">
-            ${data[c].item.symbol}
-        </h3>
-        <span class ="Trending-market-Rank">
-        Trending Coin:${data[c].item.score + 1}
-        
-        </span>
-        <span class = "Trending-priceInBTC">
-        BTC :
-        ${data[c].item.price_btc}
-        </span>
-        </div>
-        
-    `;
-            this._parentElement.insertAdjacentHTML('beforeend', markup);
-        }
-    }
-}
-exports.default = new coinsTrending();
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4hMAX":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-class pagionationView {
-    _parentElement = document.querySelector('.pagination');
-    _data;
-    render(data) {
-        if (!data || Array.isArray(data) && data.length === 0) return this.errorMessage();
-        this._data = data;
-        const markup = this._generateMarkup();
-        this._parentElement.insertAdjacentHTML('afterbegin', markup);
-    }
-    adaHandler(handler) {
-        this._parentElement.addEventListener('click', function(e) {
-            const btn = e.target.closest('.btn--inline');
-            console.log(btn);
-            if (!btn) return;
-            const goToPage = btn.dataset.goto //getting the button number 
-            ;
-            handler(goToPage) //calling the controlPagination function to essentially change the number when pressed 
-            ;
-        });
-    }
-    _generateMarkup() {
-        //getting the current page and the number of pages 
-        const curPage = this._data.page;
-        const numPages = this._data.coins.coins.length / this._data.resultsPerPage;
-        //page1 and there is other pages
-        if (curPage == 1 && numPages > 1) return `
-            <button data-goto = "${curPage + 1}" class="btn--inline pagination__btn--next">
-            <span>Page ${curPage + 1}</span>
-            <svg class="search__icon">
-              <use href=#icon-arrow-right"></use>
-            </svg>
-          </button>`;
-        //last page
-        if (curPage == numPages && numPages > 1) return `button data-goto = "${curPage - 1}"class="btn--inline pagination__btn--prev">
-            <svg class="search__icon">
-              <use href="src/img/icons.svg#icon-arrow-left"></use>
-            </svg>
-            <span>Page ${curPage - 1}</span>
-          </button>`;
-        //other page
-        if (curPage < numPages) return `<button data-goto = "${curPage - 1}"class="btn--inline pagination__btn--prev">
-            <svg class="search__icon">
-              <use href="src/img/icons.svg#icon-arrow-left"></use>
-            </svg>
-            <span>Page ${curPage - 1}</span>
-          </button>
-          <button data-goto = "${curPage + 1}"class="btn--inline pagination__btn--next">
-            <span>Page ${curPage + 1}</span>
-            <svg class="search__icon">
-              <use href="src/img/icons.svg#icon-arrow-right"></use>
-            </svg>
-          </button>
-            `;
-    }
-}
-exports.default = new pagionationView();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ddCAb","aenu9"], "aenu9", "parcelRequirefb07")
 

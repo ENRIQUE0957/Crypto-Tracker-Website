@@ -1,0 +1,176 @@
+*{
+    padding:0;
+    margin:0
+
+}
+html {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-size: 62.5%; /*this is relative to 1rem  = 10px*/
+    font-family: 'Roboto', sans-serif;
+}
+@media only screen and (max-width: 61.25em) {
+    html {
+      font-size: 50%;
+    }
+  }
+body{
+font-weight: 400;
+line-height: 1.6;
+font-size:1rem;
+color:white;
+background-size: cover;
+background-repeat: no-repeat;
+min-height:100vh;
+background-image:linear-gradient(to right bottom,blue,white);
+font-family: 'Roboto', sans-serif;
+
+
+}
+.container{
+    display:grid;
+    grid-template-columns: auto;
+    grid-template-rows:2fr;
+    min-height:117rem;
+    
+    padding:1rem 13rem;
+}
+
+.header{
+    
+    padding:0rem 2rem
+    
+}
+.stats{
+display:flex;
+list-style:none;
+justify-content:space-evenly
+
+
+}
+.list-item{
+    border-bottom:1px solid white
+    
+}
+.list-item:hover{
+    transform:translateY(-3px);
+    box-shadow:0 1.5rem 2rem rgb(0 0 0 /20%);
+}
+.header-logo{
+    border-radius:100rem;
+    height:7rem;
+    box-shadow:0 2rem 6rem 0.5rem rgb(97 85 81 / 20%);
+    margin-top:1rem;
+    margin-left:1rem;
+}
+.header-rank{
+
+}
+.header-price{
+margin-left:3rem
+}
+.header-graph{
+    margin-left:2rem;
+}
+.header-name{
+    margin-left:8rem;
+}
+/*header crypto name and value styling*/
+.crypto-name{
+    font-size:1.2rem;
+    text-transform:uppercase;
+
+
+}
+.crypto-value{
+font-size:1.2rem;
+text-align:center;
+}
+.container-header{
+    padding:3rem 2rem;
+    margin-top:9rem;
+}
+
+/*coins box*/
+.coins{
+    display:flex;
+    width:100%;
+    border-bottom:2px solid rgb(173, 172, 172)
+}
+.coins-box{
+    background-color:white;
+    border-radius:50px;
+    width:70%;
+    margin-left:24rem;
+}
+.coin-row{
+    display:flex;
+    width:97%;
+    justify-content: space-evenly;
+    margin-top:2rem;
+    background-color:white;
+    color:black;
+    font-size:1.4rem;
+    margin-left:2rem;
+    padding:0.8rem 0rem
+  
+    
+}
+.header-list{
+    display:flex;
+    list-style: none;
+    font-size:1.8rem;
+    justify-content: space-evenly;
+    font-weight: 400;
+    width:65%;
+    margin-left:25rem;
+
+}
+
+/*coins container styling*/
+.rank{
+padding:1rem;
+font-size:1.4rem;
+}
+.name{
+padding:1rem;
+font-size:1.7rem;
+}
+.Volume-change{
+    padding:1rem;
+    align-self:center;
+    
+}
+.price{
+padding:1rem;
+align-self: center;
+}
+.coin-image{
+height:5rem;
+}
+.crypto-ID{
+    margin-left:1rem;
+    display:flex;
+    align-content: center;
+    align-items: center;
+}
+
+/*coin-stats*/
+.crypto-Stats{
+    display:flex;
+    justify-content: space-evenly;
+
+}
+.coin-marketcap{
+align-self:center;
+}
+#myChart{
+ height:300px;
+ width:300px;
+ margin-right:10rem;
+ padding:0.5rem;
+    
+    
+
+}
+/*# sourceMappingURL=index.3a01df49.css.map */

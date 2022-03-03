@@ -1,0 +1,6 @@
+tree 438c0c9f395c7371879905843a2ab9d4b2011d24
+parent ab68dfdd3bdea58a47fc1145f275d540a4c565bc
+author enrique cipriano <76191555+ENRIQUE0957@users.noreply.github.com> 1645492589 -0600
+committer enrique cipriano <76191555+ENRIQUE0957@users.noreply.github.com> 1645492589 -0600
+
+Rendering our coins and graph using the MVC paradigm
