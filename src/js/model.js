@@ -4,12 +4,12 @@ import { getJSON } from './helpers'
 
 export const state = {
     headerStats:{},
-    coins:{},
+    
     trends:{},
     getSeachResultsPage:{
         page:1,
         resultsPerPage:12,
-        coins:{}
+        coins:[]
     }
 
 
@@ -45,7 +45,7 @@ export const loadCoins = async function(){
     const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=60&currency=EUR')
     const resp2 = await resp1.json()
    
-    state.getSeachResultsPage.coins = resp2;
+    state.getSeachResultsPage.coins= resp2.coins;
     console.log(state.getSeachResultsPage.coins)
     
     
@@ -69,5 +69,5 @@ state.getSeachResultsPage.page =page;
 const start  = (page-1) * state.getSeachResultsPage.resultsPerPage
 const end = page * state.getSeachResultsPage.resultsPerPage
 
-return state.getSeachResultsPage.coins.coins.slice(start,end);
+return state.getSeachResultsPage.coins.slice(start,end);
 }
