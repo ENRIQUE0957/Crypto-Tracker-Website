@@ -276,13 +276,13 @@ margin-right:2rem;
 .coinsHeader-list{
 display:flex;
 list-style: none;
-column-gap: 5rem;
-justify-content: center;
+column-gap: 2rem;
+
 font-size:1.4rem;
 
 }
 .coinsHeader-list__header{
-margin-right:21rem;
+margin-right:24rem;
 }
 .coinsHeader-list__volume{
     margin-right:3.8rem;
@@ -356,6 +356,7 @@ opacity:0;
     font-weight:600;
     font-size:1.9rem;
     letter-spacing:1px;
+    text-align:center;
 }
 .contact-us{
 
@@ -365,6 +366,7 @@ list-style:none;
 display:flex;
 column-gap:1.6rem;
 margin-top:8rem;
+justify-content:flex-start;
 
 }
 .footer-service:hover{
@@ -373,7 +375,7 @@ margin-top:8rem;
 }
 .footer-service{
 color:rgb(48, 48, 48);
-font-size:1.9rem;
+font-size:1.6rem;
 letter-spacing:1px;
 font-family:Roboto;
 font-weight:600;
@@ -381,13 +383,18 @@ font-weight:600;
 }
 .mentiones{
 position:absolute;
-top:53%;
-left:70%;
+top:55%;
+left:56%;
 font-size:1.6rem;
-font-size:1.6rem
+font-size:1.6rem;
+display:flex;
+column-gap: 1.3rem;
 }
 .paragraph-mentiones{
 margin-bottom:2.5rem;
+}
+.contact-us{
+    
 }
 .bottom-paragraph{
 margin-bottom:2.5rem
@@ -398,7 +405,8 @@ margin-bottom:2.5rem
     box-shadow: 0 2rem 6rem 2.5rem rgb(97 85 81 / 20%);
     position: absolute;
     top:34%;
-    left:2%
+    left:38%
+    
 
 }
 

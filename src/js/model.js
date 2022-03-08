@@ -8,7 +8,7 @@ export const state = {
     trends:{},
     getSeachResultsPage:{
         page:1,
-        resultsPerPage:12,
+        resultsPerPage:20,
         coins:[]
     }
 
@@ -42,7 +42,7 @@ export const getHeaderStats = async function(){
     
 //function to get coins we will use as parameters for our coins rendering 
 export const loadCoins = async function(){
-    const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=60&currency=EUR')
+    const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=100&currency=EUR')
     const resp2 = await resp1.json()
    
     state.getSeachResultsPage.coins= resp2.coins;

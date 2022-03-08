@@ -583,7 +583,7 @@ const state = {
     },
     getSeachResultsPage: {
         page: 1,
-        resultsPerPage: 12,
+        resultsPerPage: 20,
         coins: []
     }
 };
@@ -607,7 +607,7 @@ const getHeaderStats = async function() {
     }
 };
 const loadCoins = async function() {
-    const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=60&currency=EUR');
+    const resp1 = await fetch('https://api.coinstats.app/public/v1/coins?skip=0&limit=100&currency=EUR');
     const resp2 = await resp1.json();
     state.getSeachResultsPage.coins = resp2.coins;
     console.log(state.getSeachResultsPage.coins);
@@ -1559,12 +1559,12 @@ class pagionationView {
             </svg>
           </button>`;
         //last page
-        if (curPage == numPages && numPages > 1) return `button data-goto = "${curPage - 1}"class="btn--inline pagination__btn--prev">
-            <svg class="search__icon">
-              <use href="src/img/icons.svg#icon-arrow-left"></use>
-            </svg>
-            <span>Page ${curPage - 1}</span>
-          </button>`;
+        if (curPage == numPages && numPages > 1) return `<button data-goto = "${curPage - 1}"class="btn--inline pagination__btn--prev">
+          <svg class="search__icon">
+            <use href="src/img/icons.svg#icon-arrow-left"></use>
+          </svg>
+          <span>Page ${curPage - 1}</span>
+        </button>`;
         //other page
         if (curPage < numPages) return `<button data-goto = "${curPage - 1}"class="btn--inline pagination__btn--prev">
             <svg class="search__icon">
