@@ -18,7 +18,7 @@ class pagionationView {
         console.log(btn)
         if(!btn)return;
 
-        const goToPage = btn.dataset.goto //getting the button number 
+        const goToPage =+btn.dataset.goto //getting the button number 
         handler(goToPage)//calling the controlPagination function to essentially change the number when pressed 
 
 
