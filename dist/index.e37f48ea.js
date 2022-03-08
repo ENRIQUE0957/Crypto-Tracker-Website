@@ -540,20 +540,26 @@ const RenderHeader = async function() {
 RenderHeader();
 //rendering our coins 
 const renderCoins = async function() {
-    document.addEventListener('DOMContentLoaded', async ()=>{
-        //getting the object we are using as a parameter
-        await _modelJs.loadCoins();
-        //rendering the data
-        _coinsViewJsDefault.default.render(_modelJs.GetPageNumber(2));
-        _paginationViewJsDefault.default.render(_modelJs.state.getSeachResultsPage);
-    });
+    //getting the object we are using as a parameter
+    await _modelJs.loadCoins();
+    //rendering the data
+    _coinsViewJsDefault.default.render(_modelJs.GetPageNumber(1));
+    _paginationViewJsDefault.default.render(_modelJs.state.getSeachResultsPage);
 };
-renderCoins();
+const controlPagination = function(goToPage) {
+    _coinsViewJsDefault.default.render(_modelJs.GetPageNumber(goToPage));
+    _paginationViewJsDefault.default.render(_modelJs.state.getSeachResultsPage);
+};
 const renderTrending = async function() {
     await _modelJs.getTrend();
     _trendingCoinsJsDefault.default.render(_modelJs.state.trends);
 };
 renderTrending();
+const init = function() {
+    _paginationViewJsDefault.default.adaHandler(controlPagination);
+    renderCoins();
+};
+init();
 
 },{"./model.js":"Y4A21","./headerView.js":"dmg94","./coinsView.js":"5AmbI","./TrendingCoins.js":"brdS8","./PaginationView.js":"4hMAX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -1526,6 +1532,7 @@ class pagionationView {
         if (!data || Array.isArray(data) && data.length === 0) return this.errorMessage();
         this._data = data;
         const markup = this._generateMarkup();
+        this._parentElement.innerHTML = "";
         this._parentElement.insertAdjacentHTML('afterbegin', markup);
     }
     adaHandler(handler) {
@@ -1542,7 +1549,7 @@ class pagionationView {
     _generateMarkup() {
         //getting the current page and the number of pages 
         const curPage = this._data.page;
-        const numPages = this._data.coins.coins.length / this._data.resultsPerPage;
+        const numPages = this._data.coins.length / this._data.resultsPerPage;
         //page1 and there is other pages
         if (curPage == 1 && numPages > 1) return `
             <button data-goto = "${curPage + 1}" class="btn--inline pagination__btn--next">

@@ -5,7 +5,9 @@ class pagionationView {
     render(data){
       if(!data || (Array.isArray(data)&& data.length === 0))return this.errorMessage()
       this._data = data
+      
       const markup = this._generateMarkup();
+      this._parentElement.innerHTML = "";
       this._parentElement.insertAdjacentHTML('afterbegin',markup)
 
     }
@@ -26,7 +28,7 @@ class pagionationView {
     _generateMarkup(){
         //getting the current page and the number of pages 
         const curPage = this._data.page;
-        const numPages = this._data.coins.coins.length/this._data.resultsPerPage
+        const numPages = this._data.coins.length/this._data.resultsPerPage
         //page1 and there is other pages
         if(curPage ==1 && numPages > 1){
             return `

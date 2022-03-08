@@ -30,20 +30,27 @@ RenderHeader()
 
 //rendering our coins 
 const renderCoins = async function(){
-document.addEventListener('DOMContentLoaded',async() =>{
+
     //getting the object we are using as a parameter
     await model.loadCoins()
 
 
     //rendering the data
-    coinsView.render(model.GetPageNumber(2))
+    coinsView.render(model.GetPageNumber(1))
 
     PaginationView.render(model.state.getSeachResultsPage)
 
-})
 }
 
-renderCoins()
+
+const controlPagination = function(goToPage){
+    coinsView.render(model.GetPageNumber(goToPage))
+
+    PaginationView.render(model.state.getSeachResultsPage)
+
+}
+
+
 
 
 const renderTrending = async function(){
@@ -54,3 +61,11 @@ const renderTrending = async function(){
 }
 
 renderTrending()
+
+const init = function(){
+    
+PaginationView.adaHandler(controlPagination)
+renderCoins()
+   
+}
+init();
