@@ -42,7 +42,7 @@ const renderCoins = async function(){
 
 }
 
-
+//function for the updating of the pagination buttons
 const controlPagination = function(goToPage){
     coinsView.render(model.GetPageNumber(goToPage))
 
@@ -61,7 +61,7 @@ const renderTrending = async function(){
 }
 
 renderTrending()
-
+//this function calls the adaHandler function and inserts that btn we get and uses it a parameter for our control pagination function
 const init = function(){
     
 PaginationView.adaHandler(controlPagination)

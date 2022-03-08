@@ -546,6 +546,7 @@ const renderCoins = async function() {
     _coinsViewJsDefault.default.render(_modelJs.GetPageNumber(1));
     _paginationViewJsDefault.default.render(_modelJs.state.getSeachResultsPage);
 };
+//function for the updating of the pagination buttons
 const controlPagination = function(goToPage) {
     _coinsViewJsDefault.default.render(_modelJs.GetPageNumber(goToPage));
     _paginationViewJsDefault.default.render(_modelJs.state.getSeachResultsPage);
@@ -555,6 +556,7 @@ const renderTrending = async function() {
     _trendingCoinsJsDefault.default.render(_modelJs.state.trends);
 };
 renderTrending();
+//this function calls the adaHandler function and inserts that btn we get and uses it a parameter for our control pagination function
 const init = function() {
     _paginationViewJsDefault.default.adaHandler(controlPagination);
     renderCoins();
