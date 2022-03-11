@@ -434,20 +434,45 @@ margin-bottom:2.5rem
 html{
     font-size:56%; /*standard size 16px 9/16 = 56%*/
 }
+.container{
+    max-width:868px;
+}
+.trending-Container{
+    padding:8.5rem 9.4rem;
+}
 .container-header{
     justify-content:inherit;
-    margin-left:14rem;
+    margin-left:7rem;
     margin-top:12rem;
 }
 .website-title{
-    top:2%;
+    top:4%;
     left:8.8%;
 }
 .header-logo{
     margin-top:2.2rem;
+    height:6.9rem;
 }
 .list-item{
-    margin-right:12rem;
+    margin-right:7rem;
+}
+.coinsHeader-list{
+    column-gap:1rem;
+}
+.header-logo{
+    margin-left:3.5rem;
+}
+.crypto-ID{
+margin-right:2.3rem;
+}
+.footer-logo{
+    left:37%;
+}
+.coins-box{
+    width:93%;
+}
+.coinsHeader-list__header{
+margin-right:15rem;
 }
 }
 
@@ -456,6 +481,53 @@ html{
         font-size:50%;
         font-family: 'Roboto', sans-serif;
     }
+    .list-item{
+        margin-right:8rem;
+    }
+    .website-title{
+        top:4%;
+
+    }
+    .trending-Container{
+        padding:7.7rem 9.4rem;
+    }
+    .crypto-ID{
+        margin-right:-0.7rem;
+    }
+    .coinsHeader-list__header{
+        margin-right:14rem;
+    }
+    .coins-box{
+        width:95%;
+    }
+    .container-header{
+        margin-left:12rem;
+    }
+    .footer-logo{
+        left:34%;
+    }
+    .services{
+        justify-content: space-between;
+    }
+    .mentiones{
+        top:72%;
+        left:22%;
+    }
+}
+@media(max-width:47.7em)/*47.7em = 763px*/{
+.container-header{
+margin-left:5rem;
+}
+.container-box{
+    max-width:719px;
+    margin-top:3rem;
+}
+.list-item{
+    margin-right:5rem;
+}
+.coin-supply{
+    padding:0;
+}
 }
 @media(max-width:37.5em){/*37.5em = 600px*/
 html{
@@ -465,6 +537,7 @@ html{
 body{
     padding:0;
 }
+
 
 }
 @media(max-width:112.5em){/*112.5em = 1800px*/
