@@ -2,10 +2,10 @@
   "name": "crypto-tracker-website",
   "version": "1.0.0",
   "description": "crypto-tracker-website",
-  "main": "index.js",
+  "default": "index.html",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
   "author": "Enrique Cipriano",
   "license": "ISC",
