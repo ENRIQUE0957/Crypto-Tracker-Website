@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "npm start"
   },
   "author": "Enrique Cipriano",
   "license": "ISC",
