@@ -9,14 +9,11 @@
   },
   "author": "Enrique Cipriano",
   "license": "ISC",
-  "devDependencies": {
-    "parcel": "latest"
-  },
   "overrides": {
     "webpack-dev-server": {
-        "portfinder": {
-            "async": ">3.2.2"
-        }
+      "portfinder": {
+        "async": ">3.2.2"
+      }
     }
-}
+  }
 }
