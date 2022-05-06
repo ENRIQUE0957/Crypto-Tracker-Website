@@ -11,5 +11,12 @@
   "license": "ISC",
   "devDependencies": {
     "parcel": "^2.2.1"
-  }
+  },
+  "overrides": {
+    "webpack-dev-server": {
+        "portfinder": {
+            "async": ">3.2.2"
+        }
+    }
+}
 }
