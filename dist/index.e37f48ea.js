@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"ddCAb":[function(require,module,exports) {
+})({"9GjUt":[function(require,module,exports) {
 "use strict";
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -167,8 +167,7 @@ function _createForOfIteratorHelper(o, allowArrayLike) {
         if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
             if (it) o = it;
             var i = 0;
-            var F = function F() {
-            };
+            var F = function F() {};
             return {
                 s: F,
                 n: function n() {
@@ -224,7 +223,7 @@ function _arrayLikeToArray(arr, len) {
     for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
     return arr2;
 }
-/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE */ /*::
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser */ /*::
 import type {
   HMRAsset,
   HMRMessage,
@@ -251,11 +250,18 @@ interface ParcelModule {
     _disposeCallbacks: Array<(mixed) => void>,
   |};
 }
+interface ExtensionContext {
+  runtime: {|
+    reload(): void,
+  |};
+}
 declare var module: {bundle: ParcelRequire, ...};
 declare var HMR_HOST: string;
 declare var HMR_PORT: string;
 declare var HMR_ENV_HASH: string;
 declare var HMR_SECURE: boolean;
+declare var chrome: ExtensionContext;
+declare var browser: ExtensionContext;
 */ var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
 function Module(moduleName) {
@@ -265,8 +271,7 @@ function Module(moduleName) {
         _acceptCallbacks: [],
         _disposeCallbacks: [],
         accept: function accept(fn) {
-            this._acceptCallbacks.push(fn || function() {
-            });
+            this._acceptCallbacks.push(fn || function() {});
         },
         dispose: function dispose(fn) {
             this._disposeCallbacks.push(fn);
@@ -275,7 +280,7 @@ function Module(moduleName) {
     module.bundle.hotData = undefined;
 }
 module.bundle.Module = Module;
-var checkedAssets, acceptedAssets, assetsToAccept;
+var checkedAssets, acceptedAssets, assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
 function getHostname() {
     return HMR_HOST || (location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
 }
@@ -289,10 +294,8 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
     var protocol = HMR_SECURE || location.protocol == 'https:' && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? 'wss' : 'ws';
     var ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/'); // $FlowFixMe
     ws.onmessage = function(event) {
-        checkedAssets = {
-        };
-        acceptedAssets = {
-        };
+        checkedAssets = {} /*: {|[string]: boolean|} */ ;
+        acceptedAssets = {} /*: {|[string]: boolean|} */ ;
         assetsToAccept = [];
         var data = JSON.parse(event.data);
         if (data.type === 'update') {
@@ -313,7 +316,12 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
                     var id = assetsToAccept[i][1];
                     if (!acceptedAssets[id]) hmrAcceptRun(assetsToAccept[i][0], id);
                 }
-            } else window.location.reload();
+            } else if ('reload' in location) location.reload();
+            else {
+                // Web extension context
+                var ext = typeof chrome === 'undefined' ? typeof browser === 'undefined' ? null : browser : chrome;
+                if (ext && ext.runtime && ext.runtime.reload) ext.runtime.reload();
+            }
         }
         if (data.type === 'error') {
             // Log parcel errors to console
@@ -407,7 +415,7 @@ function reloadCSS() {
             var href = links[i].getAttribute('href');
             var hostname = getHostname();
             var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
-            var absolute = /^https?:\/\//i.test(href) && href.indexOf(window.location.origin) !== 0 && !servedFromHMRServer;
+            var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
             if (!absolute) updateLink(links[i]);
         }
         cssTimeout = null;
@@ -499,8 +507,7 @@ function hmrAcceptCheckOne(bundle, id, depsByBundle) {
 }
 function hmrAcceptRun(bundle, id) {
     var cached = bundle.cache[id];
-    bundle.hotData = {
-    };
+    bundle.hotData = {};
     if (cached && cached.hot) cached.hot.data = bundle.hotData;
     if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
         cb(bundle.hotData);
@@ -579,10 +586,8 @@ parcelHelpers.export(exports, "GetPageNumber", ()=>GetPageNumber
 var _regeneratorRuntime = require("regenerator-Runtime");
 var _helpers = require("./helpers");
 const state = {
-    headerStats: {
-    },
-    trends: {
-    },
+    headerStats: {},
+    trends: {},
     getSeachResultsPage: {
         page: 1,
         resultsPerPage: 20,
@@ -638,8 +643,7 @@ const GetPageNumber = function(page = state.getSeachResultsPage.page) {
     var Op = Object.prototype;
     var hasOwn = Op.hasOwnProperty;
     var undefined; // More compressible than void 0.
-    var $Symbol = typeof Symbol === "function" ? Symbol : {
-    };
+    var $Symbol = typeof Symbol === "function" ? Symbol : {};
     var iteratorSymbol = $Symbol.iterator || "@@iterator";
     var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
     var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
@@ -654,8 +658,7 @@ const GetPageNumber = function(page = state.getSeachResultsPage.page) {
     }
     try {
         // IE 8 has a broken Object.defineProperty that only works on DOM objects.
-        define({
-        }, "");
+        define({}, "");
     } catch (err1) {
         define = function(obj, key, value) {
             return obj[key] = value;
@@ -701,22 +704,17 @@ const GetPageNumber = function(page = state.getSeachResultsPage.page) {
     var GenStateCompleted = "completed";
     // Returning this object from the innerFn has the same effect as
     // breaking out of the dispatch switch statement.
-    var ContinueSentinel = {
-    };
+    var ContinueSentinel = {};
     // Dummy constructor functions that we use as the .constructor and
     // .constructor.prototype properties for functions that return Generator
     // objects. For full spec compliance, you may wish to configure your
     // minifier not to mangle the names of these two functions.
-    function Generator() {
-    }
-    function GeneratorFunction() {
-    }
-    function GeneratorFunctionPrototype() {
-    }
+    function Generator() {}
+    function GeneratorFunction() {}
+    function GeneratorFunctionPrototype() {}
     // This is a polyfill for %IteratorPrototype% for environments that
     // don't natively support it.
-    var IteratorPrototype = {
-    };
+    var IteratorPrototype = {};
     define(IteratorPrototype, iteratorSymbol, function() {
         return this;
     });
@@ -978,8 +976,7 @@ const GetPageNumber = function(page = state.getSeachResultsPage.page) {
         this.tryEntries.push(entry);
     }
     function resetTryEntry(entry) {
-        var record = entry.completion || {
-        };
+        var record = entry.completion || {};
         record.type = "normal";
         delete record.arg;
         entry.completion = record;
@@ -1121,8 +1118,7 @@ const GetPageNumber = function(page = state.getSeachResultsPage.page) {
             if (finallyEntry && (type === "break" || type === "continue") && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc) // Ignore the finally entry if control is not jumping to a
             // location outside the try/catch block.
             finallyEntry = null;
-            var record = finallyEntry ? finallyEntry.completion : {
-            };
+            var record = finallyEntry ? finallyEntry.completion : {};
             record.type = type;
             record.arg = arg;
             if (finallyEntry) {
@@ -1185,12 +1181,7 @@ const GetPageNumber = function(page = state.getSeachResultsPage.page) {
     // regeneratorRuntime in the outer scope, which allows this module to be
     // injected easily by `bin/regenerator --include-runtime script.js`.
     return exports;
-}(// If this script is executing as a CommonJS module, use module.exports
-// as the regeneratorRuntime namespace. Otherwise create a new empty
-// object. Either way, the resulting object will be used to initialize
-// the regeneratorRuntime variable at the top of this file.
-typeof module === "object" ? module.exports : {
-});
+}(module.exports);
 try {
     regeneratorRuntime = runtime;
 } catch (accidentalStrictMode) {
@@ -1585,6 +1576,6 @@ class pagionationView {
 }
 exports.default = new pagionationView();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ddCAb","aenu9"], "aenu9", "parcelRequirefb07")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["9GjUt","aenu9"], "aenu9", "parcelRequirefb07")
 
 //# sourceMappingURL=index.e37f48ea.js.map
