@@ -10,7 +10,7 @@
   "author": "Enrique Cipriano",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.2.1"
+    "parcel": "latest"
   },
   "overrides": {
     "webpack-dev-server": {
