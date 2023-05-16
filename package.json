@@ -18,5 +18,8 @@
   },
   "devDependencies": {
     "parcel": "^2.5.0"
+  },
+  "dependencies": {
+    "regenerator-runtime": "^0.13.11"
   }
 }
